@@ -7,6 +7,10 @@
 /doc/
 /coverage/
 
+# JS build tooling (Node is required to build the vendored bundle, never to use it)
+/node_modules/
+/vendor/*.tmp
+
 # Beads / Dolt files (added by bd init)
 .dolt/
 *.db

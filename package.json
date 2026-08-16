@@ -1,0 +1,10 @@
+{
+  "name": "herb-embedded-bundle-build",
+  "private": true,
+  "description": "Build-time only: vendors @herb-tools/linter into vendor/herb-linter.js. Node is required to build this gem, never to use it.",
+  "devDependencies": {
+    "@herb-tools/linter": "0.10.3",
+    "dedent": "1.7.2",
+    "esbuild": "0.28.2"
+  }
+}

@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.summary = "Embedded Herb linter for Ruby via a pluggable JavaScript engine adapter"
   spec.required_ruby_version = ">= 3.2"
 
-  spec.files = Dir["lib/**/*.rb"]
+  spec.files = Dir["lib/**/*.rb"] + Dir["vendor/**/*.js"]
   spec.require_paths = ["lib"]
 
   spec.metadata = {
