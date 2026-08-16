@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "herb_embedded",
+  "project_id": "5de9e24d-8c78-46ef-83c6-ca024cefbaf2"
+}

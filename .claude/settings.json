@@ -1,6 +1,18 @@
 {
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "bd prime --hook-json",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ]
+  },
   "permissions": {
-    "defaultMode": "acceptEdits",
     "allow": [
       "Edit",
       "Write",
@@ -11,6 +23,7 @@
       "Bash(ruby -v)",
       "Bash(gem list*)",
       "Bash(gem build*)"
-    ]
+    ],
+    "defaultMode": "acceptEdits"
   }
 }
