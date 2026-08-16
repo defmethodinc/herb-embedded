@@ -13,8 +13,8 @@ var HerbLinter = (() => {
     }
   };
   var __export = (target2, all) => {
-    for (var name in all)
-      __defProp(target2, name, { get: all[name], enumerable: true });
+    for (var name2 in all)
+      __defProp(target2, name2, { get: all[name2], enumerable: true });
   };
   var __copyProps = (to, from, except, desc) => {
     if (from && typeof from === "object" || typeof from === "function") {
@@ -1804,12 +1804,479 @@ var HerbLinter = (() => {
   // js/entry.mjs
   var entry_exports = {};
   __export(entry_exports, {
+    AST_TYPE_GUARDS: () => AST_TYPE_GUARDS,
+    CDATANode: () => CDATANode,
+    CHARACTER_REFERENCE_PATTERN: () => CHARACTER_REFERENCE_PATTERN,
+    ConditionalElementConditionMismatchError: () => ConditionalElementConditionMismatchError,
+    ConditionalElementMultipleTagsError: () => ConditionalElementMultipleTagsError,
+    DEFAULT_CONFIG: () => DEFAULT_CONFIG,
+    DEFAULT_EXTRACT_RUBY_OPTIONS: () => DEFAULT_EXTRACT_RUBY_OPTIONS,
+    DEFAULT_FRAMEWORK: () => DEFAULT_FRAMEWORK,
+    DEFAULT_PARSER_OPTIONS: () => DEFAULT_PARSER_OPTIONS,
+    DEFAULT_TEMPLATE_ENGINE: () => DEFAULT_TEMPLATE_ENGINE,
+    DocumentNode: () => DocumentNode,
+    DotNotationCasingError: () => DotNotationCasingError,
+    ERBBeginNode: () => ERBBeginNode,
+    ERBBlockNode: () => ERBBlockNode,
+    ERBCaseMatchNode: () => ERBCaseMatchNode,
+    ERBCaseNode: () => ERBCaseNode,
+    ERBCaseWithConditionsError: () => ERBCaseWithConditionsError,
+    ERBContentNode: () => ERBContentNode,
+    ERBControlFlowScopeError: () => ERBControlFlowScopeError,
+    ERBElseNode: () => ERBElseNode,
+    ERBEndNode: () => ERBEndNode,
+    ERBEnsureNode: () => ERBEnsureNode,
+    ERBForNode: () => ERBForNode,
+    ERBIfNode: () => ERBIfNode,
+    ERBInNode: () => ERBInNode,
+    ERBMultipleBlocksInTagError: () => ERBMultipleBlocksInTagError,
+    ERBNodeClasses: () => ERBNodeClasses,
+    ERBOpenTagNode: () => ERBOpenTagNode,
+    ERBRenderNode: () => ERBRenderNode,
+    ERBRescueNode: () => ERBRescueNode,
+    ERBStrictLocalsNode: () => ERBStrictLocalsNode,
+    ERBUnlessNode: () => ERBUnlessNode,
+    ERBUntilNode: () => ERBUntilNode,
+    ERBWhenNode: () => ERBWhenNode,
+    ERBWhileNode: () => ERBWhileNode,
+    ERBYieldNode: () => ERBYieldNode,
+    HELPERS_BY_TAG_NAME: () => HELPERS_BY_TAG_NAME,
+    HELPER_BY_SOURCE: () => HELPER_BY_SOURCE,
+    HELPER_REGISTRY: () => HELPER_REGISTRY,
+    HTMLAttributeNameNode: () => HTMLAttributeNameNode,
+    HTMLAttributeNode: () => HTMLAttributeNode,
+    HTMLAttributeValueNode: () => HTMLAttributeValueNode,
+    HTMLCloseTagNode: () => HTMLCloseTagNode,
+    HTMLCommentNode: () => HTMLCommentNode,
+    HTMLConditionalElementNode: () => HTMLConditionalElementNode,
+    HTMLConditionalOpenTagNode: () => HTMLConditionalOpenTagNode,
+    HTMLDoctypeNode: () => HTMLDoctypeNode,
+    HTMLElementNode: () => HTMLElementNode,
+    HTMLOmittedCloseTagNode: () => HTMLOmittedCloseTagNode,
+    HTMLOpenTagNode: () => HTMLOpenTagNode,
+    HTMLTextNode: () => HTMLTextNode,
+    HTMLVirtualCloseTagNode: () => HTMLVirtualCloseTagNode,
+    HTML_BOOLEAN_ATTRIBUTES: () => HTML_BOOLEAN_ATTRIBUTES,
+    HTML_NAMED_CHARACTER_REFERENCES: () => HTML_NAMED_CHARACTER_REFERENCES,
+    HelperType: () => HelperType,
+    HerbBackend: () => HerbBackend,
+    HerbError: () => HerbError,
+    HerbWarning: () => HerbWarning,
+    InvalidCommentClosingTagError: () => InvalidCommentClosingTagError,
+    LexResult: () => LexResult,
     Linter: () => Linter,
-    rules: () => rules
+    LiteralNode: () => LiteralNode,
+    Location: () => Location,
+    MissingAttributeValueError: () => MissingAttributeValueError,
+    MissingClosingTagError: () => MissingClosingTagError,
+    MissingERBEndTagError: () => MissingERBEndTagError,
+    MissingOpeningTagError: () => MissingOpeningTagError,
+    NODE_TYPE_GUARDS: () => NODE_TYPE_GUARDS,
+    NestedERBTagError: () => NestedERBTagError,
+    Node: () => Node,
+    OmittedClosingTagError: () => OmittedClosingTagError,
+    ParseResult: () => ParseResult2,
+    ParserOptions: () => ParserOptions,
+    Position: () => Position,
+    PrismBasicVisitor: () => PrismBasicVisitor,
+    PrismNodes: () => nodes_exports,
+    PrismVisitor: () => PrismVisitor,
+    Range: () => Range,
+    RenderAmbiguousLocalsError: () => RenderAmbiguousLocalsError,
+    RenderConflictingPartialError: () => RenderConflictingPartialError,
+    RenderInvalidAsOptionError: () => RenderInvalidAsOptionError,
+    RenderLayoutWithoutBlockError: () => RenderLayoutWithoutBlockError,
+    RenderMissingLocalsError: () => RenderMissingLocalsError,
+    RenderNoArgumentsError: () => RenderNoArgumentsError,
+    RenderObjectAndCollectionError: () => RenderObjectAndCollectionError,
+    Result: () => Result,
+    RubyHTMLAttributesSplatNode: () => RubyHTMLAttributesSplatNode,
+    RubyLiteralNode: () => RubyLiteralNode,
+    RubyParameterNode: () => RubyParameterNode,
+    RubyParseError: () => RubyParseError,
+    RubyRenderKeywordsNode: () => RubyRenderKeywordsNode,
+    RubyRenderLocalNode: () => RubyRenderLocalNode,
+    StrayERBClosingTagError: () => StrayERBClosingTagError,
+    StrictLocalsBlockArgumentError: () => StrictLocalsBlockArgumentError,
+    StrictLocalsDuplicateDeclarationError: () => StrictLocalsDuplicateDeclarationError,
+    StrictLocalsMissingParenthesisError: () => StrictLocalsMissingParenthesisError,
+    StrictLocalsPositionalArgumentError: () => StrictLocalsPositionalArgumentError,
+    StrictLocalsSplatArgumentError: () => StrictLocalsSplatArgumentError,
+    TOKEN_LIST_ATTRIBUTES: () => TOKEN_LIST_ATTRIBUTES,
+    TagNamesMismatchError: () => TagNamesMismatchError,
+    TimeoutError: () => TimeoutError,
+    Token: () => Token,
+    TokenList: () => TokenList,
+    UnclosedCloseTagError: () => UnclosedCloseTagError,
+    UnclosedERBTagError: () => UnclosedERBTagError,
+    UnclosedElementError: () => UnclosedElementError,
+    UnclosedOpenTagError: () => UnclosedOpenTagError,
+    UnclosedQuoteError: () => UnclosedQuoteError,
+    UnexpectedError: () => UnexpectedError,
+    UnexpectedTokenError: () => UnexpectedTokenError,
+    VALID_FRAMEWORKS: () => VALID_FRAMEWORKS,
+    VALID_TEMPLATE_ENGINES: () => VALID_TEMPLATE_ENGINES,
+    Visitor: () => Visitor2,
+    VoidElementClosingTagError: () => VoidElementClosingTagError,
+    VoidElementContentError: () => VoidElementContentError,
+    WhitespaceNode: () => WhitespaceNode,
+    XMLDeclarationNode: () => XMLDeclarationNode,
+    _TYPECHECK: () => _TYPECHECK,
+    areAllOfType: () => areAllOfType,
+    createERBOutputNode: () => createERBOutputNode,
+    createERBSilentNode: () => createERBSilentNode,
+    createLiteral: () => createLiteral,
+    createSyntheticToken: () => createSyntheticToken,
+    createWhitespaceNode: () => createWhitespaceNode,
+    deserializeDiagnostic: () => deserializeDiagnostic,
+    deserializePrismNode: () => deserializePrismNode,
+    deserializePrismParseResult: () => deserializePrismParseResult,
+    didyoumean: () => didyoumean,
+    didyoumeanRanked: () => didyoumeanRanked,
+    ensureLibHerbBackend: () => ensureLibHerbBackend,
+    ensureString: () => ensureString,
+    filterCDATANodes: () => filterCDATANodes,
+    filterDocumentNodes: () => filterDocumentNodes,
+    filterERBBeginNodes: () => filterERBBeginNodes,
+    filterERBBlockNodes: () => filterERBBlockNodes,
+    filterERBCaseMatchNodes: () => filterERBCaseMatchNodes,
+    filterERBCaseNodes: () => filterERBCaseNodes,
+    filterERBContentNodes: () => filterERBContentNodes,
+    filterERBElseNodes: () => filterERBElseNodes,
+    filterERBEndNodes: () => filterERBEndNodes,
+    filterERBEnsureNodes: () => filterERBEnsureNodes,
+    filterERBForNodes: () => filterERBForNodes,
+    filterERBIfNodes: () => filterERBIfNodes,
+    filterERBInNodes: () => filterERBInNodes,
+    filterERBOpenTagNodes: () => filterERBOpenTagNodes,
+    filterERBRenderNodes: () => filterERBRenderNodes,
+    filterERBRescueNodes: () => filterERBRescueNodes,
+    filterERBStrictLocalsNodes: () => filterERBStrictLocalsNodes,
+    filterERBUnlessNodes: () => filterERBUnlessNodes,
+    filterERBUntilNodes: () => filterERBUntilNodes,
+    filterERBWhenNodes: () => filterERBWhenNodes,
+    filterERBWhileNodes: () => filterERBWhileNodes,
+    filterERBYieldNodes: () => filterERBYieldNodes,
+    filterHTMLAttributeNameNodes: () => filterHTMLAttributeNameNodes,
+    filterHTMLAttributeNodes: () => filterHTMLAttributeNodes,
+    filterHTMLAttributeValueNodes: () => filterHTMLAttributeValueNodes,
+    filterHTMLCloseTagNodes: () => filterHTMLCloseTagNodes,
+    filterHTMLCommentNodes: () => filterHTMLCommentNodes,
+    filterHTMLConditionalElementNodes: () => filterHTMLConditionalElementNodes,
+    filterHTMLConditionalOpenTagNodes: () => filterHTMLConditionalOpenTagNodes,
+    filterHTMLDoctypeNodes: () => filterHTMLDoctypeNodes,
+    filterHTMLElementNodes: () => filterHTMLElementNodes,
+    filterHTMLOmittedCloseTagNodes: () => filterHTMLOmittedCloseTagNodes,
+    filterHTMLOpenTagNodes: () => filterHTMLOpenTagNodes,
+    filterHTMLTextNodes: () => filterHTMLTextNodes,
+    filterHTMLVirtualCloseTagNodes: () => filterHTMLVirtualCloseTagNodes,
+    filterLiteralNodes: () => filterLiteralNodes,
+    filterNodes: () => filterNodes,
+    filterRubyHTMLAttributesSplatNodes: () => filterRubyHTMLAttributesSplatNodes,
+    filterRubyLiteralNodes: () => filterRubyLiteralNodes,
+    filterRubyParameterNodes: () => filterRubyParameterNodes,
+    filterRubyRenderKeywordsNodes: () => filterRubyRenderKeywordsNodes,
+    filterRubyRenderLocalNodes: () => filterRubyRenderLocalNodes,
+    filterWhitespaceNodes: () => filterWhitespaceNodes,
+    filterXMLDeclarationNodes: () => filterXMLDeclarationNodes,
+    findAttributeByName: () => findAttributeByName,
+    findParentArray: () => findParentArray,
+    findPreferredHelperForTag: () => findPreferredHelperForTag,
+    forEachAttribute: () => forEachAttribute,
+    fromSerializedError: () => fromSerializedError,
+    fromSerializedNode: () => fromSerializedNode,
+    getAttribute: () => getAttribute,
+    getAttributeName: () => getAttributeName,
+    getAttributeValue: () => getAttributeValue,
+    getAttributeValueNodes: () => getAttributeValueNodes,
+    getAttributeValueQuoteType: () => getAttributeValueQuoteType,
+    getAttributes: () => getAttributes,
+    getCombinedAttributeName: () => getCombinedAttributeName,
+    getCombinedAttributeNameString: () => getCombinedAttributeNameString,
+    getCombinedStringFromNodes: () => getCombinedStringFromNodes,
+    getHelper: () => getHelper,
+    getHelperBySource: () => getHelperBySource,
+    getHelperEntries: () => getHelperEntries,
+    getHelpersByGem: () => getHelpersByGem,
+    getHelpersByModule: () => getHelpersByModule,
+    getHelpersByOutput: () => getHelpersByOutput,
+    getHelpersForTag: () => getHelpersForTag,
+    getNamedCharacterReference: () => getNamedCharacterReference,
+    getNodesAfterLocation: () => getNodesAfterLocation,
+    getNodesAfterPosition: () => getNodesAfterPosition,
+    getNodesBeforeLocation: () => getNodesBeforeLocation,
+    getNodesBeforePosition: () => getNodesBeforePosition,
+    getOpenTag: () => getOpenTag,
+    getStaticAttributeName: () => getStaticAttributeName,
+    getStaticAttributeValue: () => getStaticAttributeValue,
+    getStaticAttributeValueContent: () => getStaticAttributeValueContent,
+    getStaticBodyText: () => getStaticBodyText,
+    getStaticContentFromNodes: () => getStaticContentFromNodes,
+    getStaticStringFromNodes: () => getStaticStringFromNodes,
+    getSupportedHelpers: () => getSupportedHelpers,
+    getTagLocalName: () => getTagLocalName,
+    getTagName: () => getTagName,
+    getTokenList: () => getTokenList,
+    getValidatableStaticContent: () => getValidatableStaticContent,
+    groupNodesByClass: () => groupNodesByClass,
+    hasAttribute: () => hasAttribute,
+    hasAttributeValue: () => hasAttributeValue,
+    hasChildren: () => hasChildren,
+    hasDynamicAttributeName: () => hasDynamicAttributeName,
+    hasDynamicAttributeNameNode: () => hasDynamicAttributeNameNode,
+    hasDynamicAttributeValue: () => hasDynamicAttributeValue,
+    hasERBContent: () => hasERBContent,
+    hasERBOutput: () => hasERBOutput,
+    hasStaticAttributeName: () => hasStaticAttributeName,
+    hasStaticAttributeValue: () => hasStaticAttributeValue,
+    hasStaticAttributeValueContent: () => hasStaticAttributeValueContent,
+    hasStaticContent: () => hasStaticContent,
+    helperExists: () => helperExists,
+    inspectPrismNode: () => inspectPrismNode,
+    inspectPrismSerialized: () => inspectPrismSerialized,
+    isAnyOf: () => isAnyOf,
+    isAttributeValueQuoted: () => isAttributeValueQuoted,
+    isBooleanAttribute: () => isBooleanAttribute,
+    isCDATANode: () => isCDATANode,
+    isCommentNode: () => isCommentNode,
+    isDocumentNode: () => isDocumentNode,
+    isERBBeginNode: () => isERBBeginNode,
+    isERBBlockNode: () => isERBBlockNode,
+    isERBCaseMatchNode: () => isERBCaseMatchNode,
+    isERBCaseNode: () => isERBCaseNode,
+    isERBCommentNode: () => isERBCommentNode,
+    isERBContentNode: () => isERBContentNode,
+    isERBControlFlowNode: () => isERBControlFlowNode,
+    isERBElseNode: () => isERBElseNode,
+    isERBEndNode: () => isERBEndNode,
+    isERBEnsureNode: () => isERBEnsureNode,
+    isERBEscapedNode: () => isERBEscapedNode,
+    isERBForNode: () => isERBForNode,
+    isERBIfNode: () => isERBIfNode,
+    isERBInNode: () => isERBInNode,
+    isERBNode: () => isERBNode,
+    isERBOpenTagNode: () => isERBOpenTagNode,
+    isERBOutputNode: () => isERBOutputNode,
+    isERBRenderNode: () => isERBRenderNode,
+    isERBRescueNode: () => isERBRescueNode,
+    isERBStrictLocalsNode: () => isERBStrictLocalsNode,
+    isERBUnlessNode: () => isERBUnlessNode,
+    isERBUntilNode: () => isERBUntilNode,
+    isERBWhenNode: () => isERBWhenNode,
+    isERBWhileNode: () => isERBWhileNode,
+    isERBYieldNode: () => isERBYieldNode,
+    isEffectivelyStatic: () => isEffectivelyStatic,
+    isEquivalentAttribute: () => isEquivalentAttribute,
+    isEquivalentElement: () => isEquivalentElement,
+    isEquivalentOpenTag: () => isEquivalentOpenTag,
+    isHTMLAttributeNameNode: () => isHTMLAttributeNameNode,
+    isHTMLAttributeNode: () => isHTMLAttributeNode,
+    isHTMLAttributeValueNode: () => isHTMLAttributeValueNode,
+    isHTMLCloseTagNode: () => isHTMLCloseTagNode,
+    isHTMLCommentNode: () => isHTMLCommentNode,
+    isHTMLConditionalElementNode: () => isHTMLConditionalElementNode,
+    isHTMLConditionalOpenTagNode: () => isHTMLConditionalOpenTagNode,
+    isHTMLDoctypeNode: () => isHTMLDoctypeNode,
+    isHTMLElementNode: () => isHTMLElementNode,
+    isHTMLNode: () => isHTMLNode,
+    isHTMLOmittedCloseTagNode: () => isHTMLOmittedCloseTagNode,
+    isHTMLOpenTagNode: () => isHTMLOpenTagNode,
+    isHTMLTextNode: () => isHTMLTextNode,
+    isHTMLVirtualCloseTagNode: () => isHTMLVirtualCloseTagNode,
+    isHelperSupported: () => isHelperSupported,
+    isLibHerbBackend: () => isLibHerbBackend,
+    isLiteralNode: () => isLiteralNode,
+    isNamedCharacterReference: () => isNamedCharacterReference,
+    isNode: () => isNode,
+    isNoneOf: () => isNoneOf,
+    isParseResult: () => isParseResult,
+    isPositionAfter: () => isPositionAfter,
+    isPositionEqual: () => isPositionEqual,
+    isPrismNodeType: () => isPrismNodeType,
+    isPureWhitespaceNode: () => isPureWhitespaceNode,
+    isRubyHTMLAttributesSplatNode: () => isRubyHTMLAttributesSplatNode,
+    isRubyLiteralNode: () => isRubyLiteralNode,
+    isRubyParameterNode: () => isRubyParameterNode,
+    isRubyRenderKeywordsNode: () => isRubyRenderKeywordsNode,
+    isRubyRenderLocalNode: () => isRubyRenderLocalNode,
+    isToken: () => isToken,
+    isValidCharacterReference: () => isValidCharacterReference,
+    isValidFramework: () => isValidFramework,
+    isValidTemplateEngine: () => isValidTemplateEngine,
+    isWhitespaceNode: () => isWhitespaceNode,
+    isXMLDeclarationNode: () => isXMLDeclarationNode,
+    levenshtein: () => levenshtein,
+    locationFromByteOffset: () => locationFromByteOffset,
+    positionFromOffset: () => positionFromOffset,
+    removeNodeFromArray: () => removeNodeFromArray,
+    replaceNodeWithBody: () => replaceNodeWithBody,
+    rules: () => rules,
+    splitLiteralsAtWhitespace: () => splitLiteralsAtWhitespace,
+    splitNodesAroundLocation: () => splitNodesAroundLocation,
+    splitNodesAroundPosition: () => splitNodesAroundPosition,
+    stringIndexFromByteOffset: () => stringIndexFromByteOffset,
+    substringFromByteOffset: () => substringFromByteOffset,
+    toMonacoDiagnostic: () => toMonacoDiagnostic
   });
 
   // node_modules/@herb-tools/linter/dist/linter.js
   var import_picomatch = __toESM(require_picomatch2());
+
+  // node_modules/@ruby/prism/src/nodes.js
+  var nodes_exports = {};
+  __export(nodes_exports, {
+    AliasGlobalVariableNode: () => AliasGlobalVariableNode,
+    AliasMethodNode: () => AliasMethodNode,
+    AlternationPatternNode: () => AlternationPatternNode,
+    AndNode: () => AndNode,
+    ArgumentsNode: () => ArgumentsNode,
+    ArrayNode: () => ArrayNode,
+    ArrayPatternNode: () => ArrayPatternNode,
+    AssocNode: () => AssocNode,
+    AssocSplatNode: () => AssocSplatNode,
+    BackReferenceReadNode: () => BackReferenceReadNode,
+    BeginNode: () => BeginNode,
+    BlockArgumentNode: () => BlockArgumentNode,
+    BlockLocalVariableNode: () => BlockLocalVariableNode,
+    BlockNode: () => BlockNode,
+    BlockParameterNode: () => BlockParameterNode,
+    BlockParametersNode: () => BlockParametersNode,
+    BreakNode: () => BreakNode,
+    CallAndWriteNode: () => CallAndWriteNode,
+    CallNode: () => CallNode,
+    CallOperatorWriteNode: () => CallOperatorWriteNode,
+    CallOrWriteNode: () => CallOrWriteNode,
+    CallTargetNode: () => CallTargetNode,
+    CapturePatternNode: () => CapturePatternNode,
+    CaseMatchNode: () => CaseMatchNode,
+    CaseNode: () => CaseNode,
+    ClassNode: () => ClassNode,
+    ClassVariableAndWriteNode: () => ClassVariableAndWriteNode,
+    ClassVariableOperatorWriteNode: () => ClassVariableOperatorWriteNode,
+    ClassVariableOrWriteNode: () => ClassVariableOrWriteNode,
+    ClassVariableReadNode: () => ClassVariableReadNode,
+    ClassVariableTargetNode: () => ClassVariableTargetNode,
+    ClassVariableWriteNode: () => ClassVariableWriteNode,
+    ConstantAndWriteNode: () => ConstantAndWriteNode,
+    ConstantOperatorWriteNode: () => ConstantOperatorWriteNode,
+    ConstantOrWriteNode: () => ConstantOrWriteNode,
+    ConstantPathAndWriteNode: () => ConstantPathAndWriteNode,
+    ConstantPathNode: () => ConstantPathNode,
+    ConstantPathOperatorWriteNode: () => ConstantPathOperatorWriteNode,
+    ConstantPathOrWriteNode: () => ConstantPathOrWriteNode,
+    ConstantPathTargetNode: () => ConstantPathTargetNode,
+    ConstantPathWriteNode: () => ConstantPathWriteNode,
+    ConstantReadNode: () => ConstantReadNode,
+    ConstantTargetNode: () => ConstantTargetNode,
+    ConstantWriteNode: () => ConstantWriteNode,
+    DefNode: () => DefNode,
+    DefinedNode: () => DefinedNode,
+    ElseNode: () => ElseNode,
+    EmbeddedStatementsNode: () => EmbeddedStatementsNode,
+    EmbeddedVariableNode: () => EmbeddedVariableNode,
+    EnsureNode: () => EnsureNode,
+    FalseNode: () => FalseNode,
+    FindPatternNode: () => FindPatternNode,
+    FlipFlopNode: () => FlipFlopNode,
+    FloatNode: () => FloatNode,
+    ForNode: () => ForNode,
+    ForwardingArgumentsNode: () => ForwardingArgumentsNode,
+    ForwardingParameterNode: () => ForwardingParameterNode,
+    ForwardingSuperNode: () => ForwardingSuperNode,
+    GlobalVariableAndWriteNode: () => GlobalVariableAndWriteNode,
+    GlobalVariableOperatorWriteNode: () => GlobalVariableOperatorWriteNode,
+    GlobalVariableOrWriteNode: () => GlobalVariableOrWriteNode,
+    GlobalVariableReadNode: () => GlobalVariableReadNode,
+    GlobalVariableTargetNode: () => GlobalVariableTargetNode,
+    GlobalVariableWriteNode: () => GlobalVariableWriteNode,
+    HashNode: () => HashNode,
+    HashPatternNode: () => HashPatternNode,
+    IfNode: () => IfNode,
+    ImaginaryNode: () => ImaginaryNode,
+    ImplicitNode: () => ImplicitNode,
+    ImplicitRestNode: () => ImplicitRestNode,
+    InNode: () => InNode,
+    IndexAndWriteNode: () => IndexAndWriteNode,
+    IndexOperatorWriteNode: () => IndexOperatorWriteNode,
+    IndexOrWriteNode: () => IndexOrWriteNode,
+    IndexTargetNode: () => IndexTargetNode,
+    InstanceVariableAndWriteNode: () => InstanceVariableAndWriteNode,
+    InstanceVariableOperatorWriteNode: () => InstanceVariableOperatorWriteNode,
+    InstanceVariableOrWriteNode: () => InstanceVariableOrWriteNode,
+    InstanceVariableReadNode: () => InstanceVariableReadNode,
+    InstanceVariableTargetNode: () => InstanceVariableTargetNode,
+    InstanceVariableWriteNode: () => InstanceVariableWriteNode,
+    IntegerNode: () => IntegerNode,
+    InterpolatedMatchLastLineNode: () => InterpolatedMatchLastLineNode,
+    InterpolatedRegularExpressionNode: () => InterpolatedRegularExpressionNode,
+    InterpolatedStringNode: () => InterpolatedStringNode,
+    InterpolatedSymbolNode: () => InterpolatedSymbolNode,
+    InterpolatedXStringNode: () => InterpolatedXStringNode,
+    ItLocalVariableReadNode: () => ItLocalVariableReadNode,
+    ItParametersNode: () => ItParametersNode,
+    KeywordHashNode: () => KeywordHashNode,
+    KeywordRestParameterNode: () => KeywordRestParameterNode,
+    LambdaNode: () => LambdaNode,
+    LocalVariableAndWriteNode: () => LocalVariableAndWriteNode,
+    LocalVariableOperatorWriteNode: () => LocalVariableOperatorWriteNode,
+    LocalVariableOrWriteNode: () => LocalVariableOrWriteNode,
+    LocalVariableReadNode: () => LocalVariableReadNode,
+    LocalVariableTargetNode: () => LocalVariableTargetNode,
+    LocalVariableWriteNode: () => LocalVariableWriteNode,
+    MatchLastLineNode: () => MatchLastLineNode,
+    MatchPredicateNode: () => MatchPredicateNode,
+    MatchRequiredNode: () => MatchRequiredNode,
+    MatchWriteNode: () => MatchWriteNode,
+    MissingNode: () => MissingNode,
+    ModuleNode: () => ModuleNode,
+    MultiTargetNode: () => MultiTargetNode,
+    MultiWriteNode: () => MultiWriteNode,
+    NextNode: () => NextNode,
+    NilNode: () => NilNode,
+    NoKeywordsParameterNode: () => NoKeywordsParameterNode,
+    NumberedParametersNode: () => NumberedParametersNode,
+    NumberedReferenceReadNode: () => NumberedReferenceReadNode,
+    OptionalKeywordParameterNode: () => OptionalKeywordParameterNode,
+    OptionalParameterNode: () => OptionalParameterNode,
+    OrNode: () => OrNode,
+    ParametersNode: () => ParametersNode,
+    ParenthesesNode: () => ParenthesesNode,
+    PinnedExpressionNode: () => PinnedExpressionNode,
+    PinnedVariableNode: () => PinnedVariableNode,
+    PostExecutionNode: () => PostExecutionNode,
+    PreExecutionNode: () => PreExecutionNode,
+    ProgramNode: () => ProgramNode,
+    RangeNode: () => RangeNode,
+    RationalNode: () => RationalNode,
+    RedoNode: () => RedoNode,
+    RegularExpressionNode: () => RegularExpressionNode,
+    RequiredKeywordParameterNode: () => RequiredKeywordParameterNode,
+    RequiredParameterNode: () => RequiredParameterNode,
+    RescueModifierNode: () => RescueModifierNode,
+    RescueNode: () => RescueNode,
+    RestParameterNode: () => RestParameterNode,
+    RetryNode: () => RetryNode,
+    ReturnNode: () => ReturnNode,
+    SelfNode: () => SelfNode,
+    ShareableConstantNode: () => ShareableConstantNode,
+    SingletonClassNode: () => SingletonClassNode,
+    SourceEncodingNode: () => SourceEncodingNode,
+    SourceFileNode: () => SourceFileNode,
+    SourceLineNode: () => SourceLineNode,
+    SplatNode: () => SplatNode,
+    StatementsNode: () => StatementsNode,
+    StringNode: () => StringNode,
+    SuperNode: () => SuperNode,
+    SymbolNode: () => SymbolNode,
+    TrueNode: () => TrueNode,
+    UndefNode: () => UndefNode,
+    UnlessNode: () => UnlessNode,
+    UntilNode: () => UntilNode,
+    WhenNode: () => WhenNode,
+    WhileNode: () => WhileNode,
+    XStringNode: () => XStringNode,
+    YieldNode: () => YieldNode
+  });
 
   // node_modules/@ruby/prism/src/visitor.js
   var BasicVisitor = class {
@@ -3962,11 +4429,11 @@ var HerbLinter = (() => {
      * @param {number} flags
      * @param {string} name
      */
-    constructor(nodeID, location, flags, name) {
+    constructor(nodeID, location, flags, name2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
     }
     /**
      * Accept a visitor for this node.
@@ -4228,11 +4695,11 @@ var HerbLinter = (() => {
      * @param {number} flags
      * @param {string} name
      */
-    constructor(nodeID, location, flags, name) {
+    constructor(nodeID, location, flags, name2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
     }
     /**
      * True if this node has the REPEATED_PARAMETER flag.
@@ -4419,11 +4886,11 @@ var HerbLinter = (() => {
      * @param {Location | null} nameLoc
      * @param {Location} operatorLoc
      */
-    constructor(nodeID, location, flags, name, nameLoc, operatorLoc) {
+    constructor(nodeID, location, flags, name2, nameLoc, operatorLoc) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
     }
@@ -4863,13 +5330,13 @@ var HerbLinter = (() => {
      * @param {Location | null} equalLoc
      * @param {Node | null} block
      */
-    constructor(nodeID, location, flags, receiver, callOperatorLoc, name, messageLoc, openingLoc, arguments_, closingLoc, equalLoc, block2) {
+    constructor(nodeID, location, flags, receiver, callOperatorLoc, name2, messageLoc, openingLoc, arguments_, closingLoc, equalLoc, block2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
       this.receiver = receiver;
       this.callOperatorLoc = callOperatorLoc;
-      this.name = name;
+      this.name = name2;
       this.messageLoc = messageLoc;
       this.openingLoc = openingLoc;
       this.arguments_ = arguments_;
@@ -5308,13 +5775,13 @@ var HerbLinter = (() => {
      * @param {string} name
      * @param {Location} messageLoc
      */
-    constructor(nodeID, location, flags, receiver, callOperatorLoc, name, messageLoc) {
+    constructor(nodeID, location, flags, receiver, callOperatorLoc, name2, messageLoc) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
       this.receiver = receiver;
       this.callOperatorLoc = callOperatorLoc;
-      this.name = name;
+      this.name = name2;
       this.messageLoc = messageLoc;
     }
     /**
@@ -5743,7 +6210,7 @@ var HerbLinter = (() => {
      * @param {Location} endKeywordLoc
      * @param {string} name
      */
-    constructor(nodeID, location, flags, locals, classKeywordLoc, constantPath, inheritanceOperatorLoc, superclass, body, endKeywordLoc, name) {
+    constructor(nodeID, location, flags, locals, classKeywordLoc, constantPath, inheritanceOperatorLoc, superclass, body, endKeywordLoc, name2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
@@ -5754,7 +6221,7 @@ var HerbLinter = (() => {
       this.superclass = superclass;
       this.body = body;
       this.endKeywordLoc = endKeywordLoc;
-      this.name = name;
+      this.name = name2;
     }
     /**
      * Accept a visitor for this node.
@@ -5849,11 +6316,11 @@ var HerbLinter = (() => {
      * @param {Location} operatorLoc
      * @param {Node} value
      */
-    constructor(nodeID, location, flags, name, nameLoc, operatorLoc, value) {
+    constructor(nodeID, location, flags, name2, nameLoc, operatorLoc, value) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
       this.value = value;
@@ -5944,11 +6411,11 @@ var HerbLinter = (() => {
      * @param {Node} value
      * @param {string} binaryOperator
      */
-    constructor(nodeID, location, flags, name, nameLoc, binaryOperatorLoc, value, binaryOperator) {
+    constructor(nodeID, location, flags, name2, nameLoc, binaryOperatorLoc, value, binaryOperator) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.binaryOperatorLoc = binaryOperatorLoc;
       this.value = value;
@@ -6036,11 +6503,11 @@ var HerbLinter = (() => {
      * @param {Location} operatorLoc
      * @param {Node} value
      */
-    constructor(nodeID, location, flags, name, nameLoc, operatorLoc, value) {
+    constructor(nodeID, location, flags, name2, nameLoc, operatorLoc, value) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
       this.value = value;
@@ -6111,11 +6578,11 @@ var HerbLinter = (() => {
      * @param {number} flags
      * @param {string} name
      */
-    constructor(nodeID, location, flags, name) {
+    constructor(nodeID, location, flags, name2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
     }
     /**
      * Accept a visitor for this node.
@@ -6180,11 +6647,11 @@ var HerbLinter = (() => {
      * @param {number} flags
      * @param {string} name
      */
-    constructor(nodeID, location, flags, name) {
+    constructor(nodeID, location, flags, name2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
     }
     /**
      * Accept a visitor for this node.
@@ -6264,11 +6731,11 @@ var HerbLinter = (() => {
      * @param {Node} value
      * @param {Location} operatorLoc
      */
-    constructor(nodeID, location, flags, name, nameLoc, value, operatorLoc) {
+    constructor(nodeID, location, flags, name2, nameLoc, value, operatorLoc) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.value = value;
       this.operatorLoc = operatorLoc;
@@ -6354,11 +6821,11 @@ var HerbLinter = (() => {
      * @param {Location} operatorLoc
      * @param {Node} value
      */
-    constructor(nodeID, location, flags, name, nameLoc, operatorLoc, value) {
+    constructor(nodeID, location, flags, name2, nameLoc, operatorLoc, value) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
       this.value = value;
@@ -6449,11 +6916,11 @@ var HerbLinter = (() => {
      * @param {Node} value
      * @param {string} binaryOperator
      */
-    constructor(nodeID, location, flags, name, nameLoc, binaryOperatorLoc, value, binaryOperator) {
+    constructor(nodeID, location, flags, name2, nameLoc, binaryOperatorLoc, value, binaryOperator) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.binaryOperatorLoc = binaryOperatorLoc;
       this.value = value;
@@ -6541,11 +7008,11 @@ var HerbLinter = (() => {
      * @param {Location} operatorLoc
      * @param {Node} value
      */
-    constructor(nodeID, location, flags, name, nameLoc, operatorLoc, value) {
+    constructor(nodeID, location, flags, name2, nameLoc, operatorLoc, value) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
       this.value = value;
@@ -6714,12 +7181,12 @@ var HerbLinter = (() => {
      * @param {Location} delimiterLoc
      * @param {Location} nameLoc
      */
-    constructor(nodeID, location, flags, parent, name, delimiterLoc, nameLoc) {
+    constructor(nodeID, location, flags, parent, name2, delimiterLoc, nameLoc) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
       this.parent = parent;
-      this.name = name;
+      this.name = name2;
       this.delimiterLoc = delimiterLoc;
       this.nameLoc = nameLoc;
     }
@@ -6981,12 +7448,12 @@ var HerbLinter = (() => {
      * @param {Location} delimiterLoc
      * @param {Location} nameLoc
      */
-    constructor(nodeID, location, flags, parent, name, delimiterLoc, nameLoc) {
+    constructor(nodeID, location, flags, parent, name2, delimiterLoc, nameLoc) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
       this.parent = parent;
-      this.name = name;
+      this.name = name2;
       this.delimiterLoc = delimiterLoc;
       this.nameLoc = nameLoc;
     }
@@ -7143,11 +7610,11 @@ var HerbLinter = (() => {
      * @param {number} flags
      * @param {string} name
      */
-    constructor(nodeID, location, flags, name) {
+    constructor(nodeID, location, flags, name2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
     }
     /**
      * Accept a visitor for this node.
@@ -7212,11 +7679,11 @@ var HerbLinter = (() => {
      * @param {number} flags
      * @param {string} name
      */
-    constructor(nodeID, location, flags, name) {
+    constructor(nodeID, location, flags, name2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
     }
     /**
      * Accept a visitor for this node.
@@ -7296,11 +7763,11 @@ var HerbLinter = (() => {
      * @param {Node} value
      * @param {Location} operatorLoc
      */
-    constructor(nodeID, location, flags, name, nameLoc, value, operatorLoc) {
+    constructor(nodeID, location, flags, name2, nameLoc, value, operatorLoc) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.value = value;
       this.operatorLoc = operatorLoc;
@@ -7426,11 +7893,11 @@ var HerbLinter = (() => {
      * @param {Location | null} equalLoc
      * @param {Location | null} endKeywordLoc
      */
-    constructor(nodeID, location, flags, name, nameLoc, receiver, parameters, body, locals, defKeywordLoc, operatorLoc, lparenLoc, rparenLoc, equalLoc, endKeywordLoc) {
+    constructor(nodeID, location, flags, name2, nameLoc, receiver, parameters, body, locals, defKeywordLoc, operatorLoc, lparenLoc, rparenLoc, equalLoc, endKeywordLoc) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.receiver = receiver;
       this.parameters = parameters;
@@ -8623,11 +9090,11 @@ var HerbLinter = (() => {
      * @param {Location} operatorLoc
      * @param {Node} value
      */
-    constructor(nodeID, location, flags, name, nameLoc, operatorLoc, value) {
+    constructor(nodeID, location, flags, name2, nameLoc, operatorLoc, value) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
       this.value = value;
@@ -8718,11 +9185,11 @@ var HerbLinter = (() => {
      * @param {Node} value
      * @param {string} binaryOperator
      */
-    constructor(nodeID, location, flags, name, nameLoc, binaryOperatorLoc, value, binaryOperator) {
+    constructor(nodeID, location, flags, name2, nameLoc, binaryOperatorLoc, value, binaryOperator) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.binaryOperatorLoc = binaryOperatorLoc;
       this.value = value;
@@ -8810,11 +9277,11 @@ var HerbLinter = (() => {
      * @param {Location} operatorLoc
      * @param {Node} value
      */
-    constructor(nodeID, location, flags, name, nameLoc, operatorLoc, value) {
+    constructor(nodeID, location, flags, name2, nameLoc, operatorLoc, value) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
       this.value = value;
@@ -8885,11 +9352,11 @@ var HerbLinter = (() => {
      * @param {number} flags
      * @param {string} name
      */
-    constructor(nodeID, location, flags, name) {
+    constructor(nodeID, location, flags, name2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
     }
     /**
      * Accept a visitor for this node.
@@ -8954,11 +9421,11 @@ var HerbLinter = (() => {
      * @param {number} flags
      * @param {string} name
      */
-    constructor(nodeID, location, flags, name) {
+    constructor(nodeID, location, flags, name2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
     }
     /**
      * Accept a visitor for this node.
@@ -9038,11 +9505,11 @@ var HerbLinter = (() => {
      * @param {Node} value
      * @param {Location} operatorLoc
      */
-    constructor(nodeID, location, flags, name, nameLoc, value, operatorLoc) {
+    constructor(nodeID, location, flags, name2, nameLoc, value, operatorLoc) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.value = value;
       this.operatorLoc = operatorLoc;
@@ -10350,11 +10817,11 @@ var HerbLinter = (() => {
      * @param {Location} operatorLoc
      * @param {Node} value
      */
-    constructor(nodeID, location, flags, name, nameLoc, operatorLoc, value) {
+    constructor(nodeID, location, flags, name2, nameLoc, operatorLoc, value) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
       this.value = value;
@@ -10445,11 +10912,11 @@ var HerbLinter = (() => {
      * @param {Node} value
      * @param {string} binaryOperator
      */
-    constructor(nodeID, location, flags, name, nameLoc, binaryOperatorLoc, value, binaryOperator) {
+    constructor(nodeID, location, flags, name2, nameLoc, binaryOperatorLoc, value, binaryOperator) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.binaryOperatorLoc = binaryOperatorLoc;
       this.value = value;
@@ -10537,11 +11004,11 @@ var HerbLinter = (() => {
      * @param {Location} operatorLoc
      * @param {Node} value
      */
-    constructor(nodeID, location, flags, name, nameLoc, operatorLoc, value) {
+    constructor(nodeID, location, flags, name2, nameLoc, operatorLoc, value) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
       this.value = value;
@@ -10612,11 +11079,11 @@ var HerbLinter = (() => {
      * @param {number} flags
      * @param {string} name
      */
-    constructor(nodeID, location, flags, name) {
+    constructor(nodeID, location, flags, name2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
     }
     /**
      * Accept a visitor for this node.
@@ -10681,11 +11148,11 @@ var HerbLinter = (() => {
      * @param {number} flags
      * @param {string} name
      */
-    constructor(nodeID, location, flags, name) {
+    constructor(nodeID, location, flags, name2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
     }
     /**
      * Accept a visitor for this node.
@@ -10765,11 +11232,11 @@ var HerbLinter = (() => {
      * @param {Node} value
      * @param {Location} operatorLoc
      */
-    constructor(nodeID, location, flags, name, nameLoc, value, operatorLoc) {
+    constructor(nodeID, location, flags, name2, nameLoc, value, operatorLoc) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.value = value;
       this.operatorLoc = operatorLoc;
@@ -11759,11 +12226,11 @@ var HerbLinter = (() => {
      * @param {Location | null} nameLoc
      * @param {Location} operatorLoc
      */
-    constructor(nodeID, location, flags, name, nameLoc, operatorLoc) {
+    constructor(nodeID, location, flags, name2, nameLoc, operatorLoc) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
     }
@@ -11971,14 +12438,14 @@ var HerbLinter = (() => {
      * @param {string} name
      * @param {number} depth
      */
-    constructor(nodeID, location, flags, nameLoc, operatorLoc, value, name, depth) {
+    constructor(nodeID, location, flags, nameLoc, operatorLoc, value, name2, depth) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
       this.value = value;
-      this.name = name;
+      this.name = name2;
       this.depth = depth;
     }
     /**
@@ -12073,14 +12540,14 @@ var HerbLinter = (() => {
      * @param {string} binaryOperator
      * @param {number} depth
      */
-    constructor(nodeID, location, flags, nameLoc, binaryOperatorLoc, value, name, binaryOperator, depth) {
+    constructor(nodeID, location, flags, nameLoc, binaryOperatorLoc, value, name2, binaryOperator, depth) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
       this.nameLoc = nameLoc;
       this.binaryOperatorLoc = binaryOperatorLoc;
       this.value = value;
-      this.name = name;
+      this.name = name2;
       this.binaryOperator = binaryOperator;
       this.depth = depth;
     }
@@ -12172,14 +12639,14 @@ var HerbLinter = (() => {
      * @param {string} name
      * @param {number} depth
      */
-    constructor(nodeID, location, flags, nameLoc, operatorLoc, value, name, depth) {
+    constructor(nodeID, location, flags, nameLoc, operatorLoc, value, name2, depth) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
       this.value = value;
-      this.name = name;
+      this.name = name2;
       this.depth = depth;
     }
     /**
@@ -12254,11 +12721,11 @@ var HerbLinter = (() => {
      * @param {string} name
      * @param {number} depth
      */
-    constructor(nodeID, location, flags, name, depth) {
+    constructor(nodeID, location, flags, name2, depth) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.depth = depth;
     }
     /**
@@ -12330,11 +12797,11 @@ var HerbLinter = (() => {
      * @param {string} name
      * @param {number} depth
      */
-    constructor(nodeID, location, flags, name, depth) {
+    constructor(nodeID, location, flags, name2, depth) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.depth = depth;
     }
     /**
@@ -12421,11 +12888,11 @@ var HerbLinter = (() => {
      * @param {Node} value
      * @param {Location} operatorLoc
      */
-    constructor(nodeID, location, flags, name, depth, nameLoc, value, operatorLoc) {
+    constructor(nodeID, location, flags, name2, depth, nameLoc, value, operatorLoc) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.depth = depth;
       this.nameLoc = nameLoc;
       this.value = value;
@@ -13005,7 +13472,7 @@ var HerbLinter = (() => {
      * @param {Location} endKeywordLoc
      * @param {string} name
      */
-    constructor(nodeID, location, flags, locals, moduleKeywordLoc, constantPath, body, endKeywordLoc, name) {
+    constructor(nodeID, location, flags, locals, moduleKeywordLoc, constantPath, body, endKeywordLoc, name2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
@@ -13014,7 +13481,7 @@ var HerbLinter = (() => {
       this.constantPath = constantPath;
       this.body = body;
       this.endKeywordLoc = endKeywordLoc;
-      this.name = name;
+      this.name = name2;
     }
     /**
      * Accept a visitor for this node.
@@ -13676,11 +14143,11 @@ var HerbLinter = (() => {
      * @param {Location} nameLoc
      * @param {Node} value
      */
-    constructor(nodeID, location, flags, name, nameLoc, value) {
+    constructor(nodeID, location, flags, name2, nameLoc, value) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.value = value;
     }
@@ -13772,11 +14239,11 @@ var HerbLinter = (() => {
      * @param {Location} operatorLoc
      * @param {Node} value
      */
-    constructor(nodeID, location, flags, name, nameLoc, operatorLoc, value) {
+    constructor(nodeID, location, flags, name2, nameLoc, operatorLoc, value) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
       this.value = value;
@@ -15039,11 +15506,11 @@ var HerbLinter = (() => {
      * @param {string} name
      * @param {Location} nameLoc
      */
-    constructor(nodeID, location, flags, name, nameLoc) {
+    constructor(nodeID, location, flags, name2, nameLoc) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
     }
     /**
@@ -15118,11 +15585,11 @@ var HerbLinter = (() => {
      * @param {number} flags
      * @param {string} name
      */
-    constructor(nodeID, location, flags, name) {
+    constructor(nodeID, location, flags, name2) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
     }
     /**
      * True if this node has the REPEATED_PARAMETER flag.
@@ -15410,11 +15877,11 @@ var HerbLinter = (() => {
      * @param {Location | null} nameLoc
      * @param {Location} operatorLoc
      */
-    constructor(nodeID, location, flags, name, nameLoc, operatorLoc) {
+    constructor(nodeID, location, flags, name2, nameLoc, operatorLoc) {
       this.nodeID = nodeID;
       this.location = location;
       this.#flags = flags;
-      this.name = name;
+      this.name = name2;
       this.nameLoc = nameLoc;
       this.operatorLoc = operatorLoc;
     }
@@ -25432,14 +25899,80 @@ var HerbLinter = (() => {
     "Turbo::StreamsHelper#turbo_stream": turboStreamEntry,
     "Turbo::StreamsHelper#turbo_stream_from": turboStreamFromEntry
   };
+  var HELPERS_BY_TAG_NAME = {
+    "meta": [actionCableMetaTagEntry, cspMetaTagEntry, csrfMetaTagsEntry, turboExemptsPageFromCacheTagEntry, turboExemptsPageFromPreviewTagEntry, turboPageRequiresReloadTagEntry, turboRefreshMethodTagEntry, turboRefreshScrollTagEntry],
+    "trix-editor": [richTextareaTagEntry],
+    "audio": [audioTagEntry],
+    "link": [autoDiscoveryLinkTagEntry, faviconLinkTagEntry, preloadLinkTagEntry, stylesheetLinkTagEntry],
+    "img": [imageTagEntry],
+    "script": [javascriptIncludeTagEntry, javascriptTagEntry],
+    "picture": [pictureTagEntry],
+    "video": [videoTagEntry],
+    "time": [timeTagEntry],
+    "form": [formForEntry, formWithEntry, formTagEntry, buttonToEntry],
+    "button": [buttonTagEntry],
+    "input": [checkboxTagEntry, colorFieldTagEntry, dateFieldTagEntry, datetimeFieldTagEntry, emailFieldTagEntry, fileFieldTagEntry, hiddenFieldTagEntry, imageSubmitTagEntry, monthFieldTagEntry, numberFieldTagEntry, passwordFieldTagEntry, radioButtonTagEntry, rangeFieldTagEntry, searchFieldTagEntry, submitTagEntry, telephoneFieldTagEntry, textFieldTagEntry, timeFieldTagEntry, urlFieldTagEntry, weekFieldTagEntry],
+    "fieldset": [fieldSetTagEntry],
+    "label": [labelTagEntry],
+    "select": [selectTagEntry],
+    "textarea": [textareaTagEntry],
+    "a": [linkToEntry, linkToIfEntry, linkToUnlessEntry, linkToUnlessCurrentEntry, mailToEntry, phoneToEntry, smsToEntry],
+    "turbo-frame": [turboFrameTagEntry],
+    "turbo-stream": [turboStreamActionTagEntry, turboStreamRefreshTagEntry],
+    "turbo-cable-stream-source": [turboStreamFromEntry]
+  };
+  function getHelper(name2) {
+    return HELPER_REGISTRY[name2];
+  }
+  function getHelperBySource(source) {
+    return HELPER_BY_SOURCE[source];
+  }
   function getHelperEntries() {
     return Object.values(HELPER_REGISTRY);
+  }
+  function isHelperSupported(name2) {
+    return HELPER_REGISTRY[name2]?.supported ?? false;
+  }
+  function helperExists(name2) {
+    return name2 in HELPER_REGISTRY;
+  }
+  function getHelpersForTag(tagName) {
+    return HELPERS_BY_TAG_NAME[tagName] ?? [];
+  }
+  function findPreferredHelperForTag(tagName) {
+    const helpers = HELPERS_BY_TAG_NAME[tagName];
+    if (!helpers)
+      return void 0;
+    return helpers.find((entry) => entry.preferredForTag) ?? helpers[0];
+  }
+  function getSupportedHelpers() {
+    return Object.values(HELPER_REGISTRY).filter((entry) => entry.supported);
+  }
+  function getHelpersByGem(gem) {
+    return Object.values(HELPER_REGISTRY).filter((entry) => entry.gem === gem);
+  }
+  function getHelpersByOutput(output) {
+    return Object.values(HELPER_REGISTRY).filter((entry) => entry.output === output);
   }
   function getHelpersByModule(moduleName) {
     return Object.values(HELPER_REGISTRY).filter((entry) => {
       const parts = entry.source.split("#")[0].split("::");
       return parts[parts.length - 1] === moduleName;
     });
+  }
+  var VALID_FRAMEWORKS = ["ruby", "actionview", "hanami", "sinatra"];
+  var VALID_TEMPLATE_ENGINES = ["erubi", "erb", "herb"];
+  var DEFAULT_FRAMEWORK = "ruby";
+  var DEFAULT_TEMPLATE_ENGINE = "erubi";
+  var DEFAULT_CONFIG = {
+    framework: DEFAULT_FRAMEWORK,
+    templateEngine: DEFAULT_TEMPLATE_ENGINE
+  };
+  function isValidFramework(value) {
+    return VALID_FRAMEWORKS.includes(value);
+  }
+  function isValidTemplateEngine(value) {
+    return VALID_TEMPLATE_ENGINES.includes(value);
   }
   var Position = class _Position {
     line;
@@ -27415,6 +27948,11 @@ var HerbLinter = (() => {
     }
   }
   var PrismVisitor = class extends Visitor {
+    visitChildNodes(node) {
+      acceptChildNodes(this, node);
+    }
+  };
+  var PrismBasicVisitor = class extends BasicVisitor {
     visitChildNodes(node) {
       acceptChildNodes(this, node);
     }
@@ -31100,6 +31638,28 @@ var HerbLinter = (() => {
         throw new Error(`Unknown node type: ${node.type}`);
     }
   }
+  var ERBNodeClasses = [
+    ERBOpenTagNode,
+    ERBContentNode,
+    ERBEndNode,
+    ERBElseNode,
+    ERBIfNode,
+    ERBBlockNode,
+    ERBWhenNode,
+    ERBCaseNode,
+    ERBCaseMatchNode,
+    ERBWhileNode,
+    ERBUntilNode,
+    ERBForNode,
+    ERBRescueNode,
+    ERBEnsureNode,
+    ERBBeginNode,
+    ERBUnlessNode,
+    ERBRenderNode,
+    ERBStrictLocalsNode,
+    ERBYieldNode,
+    ERBInNode
+  ];
   var Result = class {
     source;
     warnings;
@@ -31481,6 +32041,9 @@ var HerbLinter = (() => {
       return false;
     return node instanceof ERBInNode || node.type === "AST_ERB_IN_NODE" || node.constructor.type === "AST_ERB_IN_NODE";
   }
+  function isHTMLNode(node) {
+    return isHTMLOpenTagNode(node) || isHTMLConditionalOpenTagNode(node) || isHTMLCloseTagNode(node) || isHTMLOmittedCloseTagNode(node) || isHTMLVirtualCloseTagNode(node) || isHTMLElementNode(node) || isHTMLConditionalElementNode(node) || isHTMLAttributeValueNode(node) || isHTMLAttributeNameNode(node) || isHTMLAttributeNode(node) || isHTMLTextNode(node) || isHTMLCommentNode(node) || isHTMLDoctypeNode(node);
+  }
   function isERBNode(node) {
     return isERBOpenTagNode(node) || isERBContentNode(node) || isERBEndNode(node) || isERBElseNode(node) || isERBIfNode(node) || isERBBlockNode(node) || isERBWhenNode(node) || isERBCaseNode(node) || isERBCaseMatchNode(node) || isERBWhileNode(node) || isERBUntilNode(node) || isERBForNode(node) || isERBRescueNode(node) || isERBEnsureNode(node) || isERBBeginNode(node) || isERBUnlessNode(node) || isERBRenderNode(node) || isERBStrictLocalsNode(node) || isERBYieldNode(node) || isERBInNode(node);
   }
@@ -31587,6 +32150,9 @@ var HerbLinter = (() => {
       }
     });
   }
+  function isNoneOf(node, ...types) {
+    return !isAnyOf(node, ...types);
+  }
   function areAllOfType(nodes, ...types) {
     return nodes.every((node) => isAnyOf(node, ...types));
   }
@@ -31614,20 +32180,137 @@ var HerbLinter = (() => {
   function isParseResult(object) {
     return object instanceof ParseResult2 || object?.constructor?.name === "ParseResult" && "value" in object;
   }
+  function hasChildren(node) {
+    return isDocumentNode(node) || isHTMLOpenTagNode(node) || isHTMLCloseTagNode(node) || isHTMLElementNode(node) || isHTMLAttributeValueNode(node) || isHTMLAttributeNameNode(node) || isHTMLCommentNode(node) || isHTMLDoctypeNode(node) || isERBElseNode(node) || isERBIfNode(node) || isERBBlockNode(node) || isERBWhenNode(node) || isERBCaseNode(node) || isERBCaseMatchNode(node) || isERBWhileNode(node) || isERBUntilNode(node) || isERBForNode(node) || isERBRescueNode(node) || isERBEnsureNode(node) || isERBBeginNode(node) || isERBUnlessNode(node) || isERBInNode(node);
+  }
+  function filterDocumentNodes(nodes) {
+    return nodes.filter(isDocumentNode);
+  }
   function filterLiteralNodes(nodes) {
     return nodes.filter(isLiteralNode);
+  }
+  function filterHTMLOpenTagNodes(nodes) {
+    return nodes.filter(isHTMLOpenTagNode);
+  }
+  function filterHTMLConditionalOpenTagNodes(nodes) {
+    return nodes.filter(isHTMLConditionalOpenTagNode);
+  }
+  function filterHTMLCloseTagNodes(nodes) {
+    return nodes.filter(isHTMLCloseTagNode);
+  }
+  function filterHTMLOmittedCloseTagNodes(nodes) {
+    return nodes.filter(isHTMLOmittedCloseTagNode);
+  }
+  function filterHTMLVirtualCloseTagNodes(nodes) {
+    return nodes.filter(isHTMLVirtualCloseTagNode);
+  }
+  function filterHTMLElementNodes(nodes) {
+    return nodes.filter(isHTMLElementNode);
+  }
+  function filterHTMLConditionalElementNodes(nodes) {
+    return nodes.filter(isHTMLConditionalElementNode);
+  }
+  function filterHTMLAttributeValueNodes(nodes) {
+    return nodes.filter(isHTMLAttributeValueNode);
+  }
+  function filterHTMLAttributeNameNodes(nodes) {
+    return nodes.filter(isHTMLAttributeNameNode);
   }
   function filterHTMLAttributeNodes(nodes) {
     return nodes.filter(isHTMLAttributeNode);
   }
+  function filterRubyLiteralNodes(nodes) {
+    return nodes.filter(isRubyLiteralNode);
+  }
+  function filterRubyHTMLAttributesSplatNodes(nodes) {
+    return nodes.filter(isRubyHTMLAttributesSplatNode);
+  }
+  function filterERBOpenTagNodes(nodes) {
+    return nodes.filter(isERBOpenTagNode);
+  }
   function filterHTMLTextNodes(nodes) {
     return nodes.filter(isHTMLTextNode);
+  }
+  function filterHTMLCommentNodes(nodes) {
+    return nodes.filter(isHTMLCommentNode);
+  }
+  function filterHTMLDoctypeNodes(nodes) {
+    return nodes.filter(isHTMLDoctypeNode);
+  }
+  function filterXMLDeclarationNodes(nodes) {
+    return nodes.filter(isXMLDeclarationNode);
+  }
+  function filterCDATANodes(nodes) {
+    return nodes.filter(isCDATANode);
   }
   function filterWhitespaceNodes(nodes) {
     return nodes.filter(isWhitespaceNode);
   }
   function filterERBContentNodes(nodes) {
     return nodes.filter(isERBContentNode);
+  }
+  function filterERBEndNodes(nodes) {
+    return nodes.filter(isERBEndNode);
+  }
+  function filterERBElseNodes(nodes) {
+    return nodes.filter(isERBElseNode);
+  }
+  function filterERBIfNodes(nodes) {
+    return nodes.filter(isERBIfNode);
+  }
+  function filterERBBlockNodes(nodes) {
+    return nodes.filter(isERBBlockNode);
+  }
+  function filterERBWhenNodes(nodes) {
+    return nodes.filter(isERBWhenNode);
+  }
+  function filterERBCaseNodes(nodes) {
+    return nodes.filter(isERBCaseNode);
+  }
+  function filterERBCaseMatchNodes(nodes) {
+    return nodes.filter(isERBCaseMatchNode);
+  }
+  function filterERBWhileNodes(nodes) {
+    return nodes.filter(isERBWhileNode);
+  }
+  function filterERBUntilNodes(nodes) {
+    return nodes.filter(isERBUntilNode);
+  }
+  function filterERBForNodes(nodes) {
+    return nodes.filter(isERBForNode);
+  }
+  function filterERBRescueNodes(nodes) {
+    return nodes.filter(isERBRescueNode);
+  }
+  function filterERBEnsureNodes(nodes) {
+    return nodes.filter(isERBEnsureNode);
+  }
+  function filterERBBeginNodes(nodes) {
+    return nodes.filter(isERBBeginNode);
+  }
+  function filterERBUnlessNodes(nodes) {
+    return nodes.filter(isERBUnlessNode);
+  }
+  function filterRubyRenderLocalNodes(nodes) {
+    return nodes.filter(isRubyRenderLocalNode);
+  }
+  function filterRubyRenderKeywordsNodes(nodes) {
+    return nodes.filter(isRubyRenderKeywordsNode);
+  }
+  function filterERBRenderNodes(nodes) {
+    return nodes.filter(isERBRenderNode);
+  }
+  function filterRubyParameterNodes(nodes) {
+    return nodes.filter(isRubyParameterNode);
+  }
+  function filterERBStrictLocalsNodes(nodes) {
+    return nodes.filter(isERBStrictLocalsNode);
+  }
+  function filterERBYieldNodes(nodes) {
+    return nodes.filter(isERBYieldNode);
+  }
+  function filterERBInNodes(nodes) {
+    return nodes.filter(isERBInNode);
   }
   function isERBOutputNode(node) {
     if (!isERBNode(node))
@@ -31672,6 +32355,9 @@ var HerbLinter = (() => {
     }
     return literalNodes.map((node) => node.content).join("");
   }
+  function hasStaticContent(nodes) {
+    return nodes.some(isLiteralNode);
+  }
   function isEffectivelyStatic(nodes) {
     return !hasERBOutput(nodes);
   }
@@ -31701,6 +32387,12 @@ var HerbLinter = (() => {
         return `[${node.type}]`;
       }
     }).join("");
+  }
+  function hasStaticAttributeName(attributeNameNode) {
+    if (!attributeNameNode.children) {
+      return false;
+    }
+    return areAllOfType(attributeNameNode.children, LiteralNode);
   }
   function hasDynamicAttributeNameNode(attributeNameNode) {
     if (!attributeNameNode.children) {
@@ -31794,8 +32486,8 @@ var HerbLinter = (() => {
   }
   function findAttributeByName(attributes, attributeName) {
     for (const attribute of filterHTMLAttributeNodes(attributes)) {
-      const name = getAttributeName(attribute);
-      if (name === attributeName.toLowerCase()) {
+      const name2 = getAttributeName(attribute);
+      if (name2 === attributeName.toLowerCase()) {
         return attribute;
       }
     }
@@ -31828,6 +32520,12 @@ var HerbLinter = (() => {
   function getAttributeValueNodes(attributeNode) {
     return attributeNode.value?.children || [];
   }
+  function hasStaticAttributeValueContent(attributeNode) {
+    return hasStaticContent(getAttributeValueNodes(attributeNode));
+  }
+  function getStaticAttributeValueContent(attributeNode) {
+    return getStaticContentFromNodes(getAttributeValueNodes(attributeNode));
+  }
   function getAttributeValue(attributeNode) {
     const valueNode = attributeNode.value;
     if (!valueNode)
@@ -31858,6 +32556,11 @@ var HerbLinter = (() => {
       return valueNode.open_quote.value === '"' ? "double" : "single";
     }
     return "none";
+  }
+  function isAttributeValueQuoted(attributeNode) {
+    if (!isHTMLAttributeValueNode(attributeNode.value))
+      return false;
+    return !!attributeNode.value.quoted;
   }
   function forEachAttribute(node, callback) {
     for (const attribute of getAttributes(node)) {
@@ -31944,12 +32647,35 @@ var HerbLinter = (() => {
       return false;
     return inclusive ? position1.column <= position2.column : position1.column < position2.column;
   }
+  function isPositionEqual(position1, position2) {
+    return position1.line === position2.line && position1.column === position2.column;
+  }
   function isPositionAfter(position1, position2, inclusive = false) {
     if (position1.line > position2.line)
       return true;
     if (position1.line < position2.line)
       return false;
     return inclusive ? position1.column >= position2.column : position1.column > position2.column;
+  }
+  function getNodesBeforeLocation(nodes, location) {
+    return nodes.filter((node) => node.location && isPositionBefore(node.location.end, location.start));
+  }
+  function getNodesAfterLocation(nodes, location) {
+    return nodes.filter((node) => node.location && isPositionAfter(node.location.start, location.end));
+  }
+  function splitNodesAroundLocation(nodes, location) {
+    return {
+      before: getNodesBeforeLocation(nodes, location),
+      after: getNodesAfterLocation(nodes, location)
+    };
+  }
+  function splitNodesAroundPosition(nodes, position) {
+    return {
+      before: getNodesBeforePosition(nodes, position),
+      // uses default: inclusive = false
+      after: getNodesAfterPosition(nodes, position)
+      // uses default: inclusive = true
+    };
   }
   function getNodesBeforePosition(nodes, position, inclusive = false) {
     return nodes.filter((node) => node.location && isPositionBefore(node.location.end, position, inclusive));
@@ -47098,8 +47824,12 @@ var HerbLinter = (() => {
     zwnj
   };
   var HTML_NAMED_CHARACTER_REFERENCES = entities;
-  function isNamedCharacterReference(name) {
-    return name in HTML_NAMED_CHARACTER_REFERENCES;
+  var CHARACTER_REFERENCE_PATTERN = /&(?:#x([0-9a-fA-F]+)|#([0-9]+)|([a-zA-Z][a-zA-Z0-9]*));/g;
+  function isNamedCharacterReference(name2) {
+    return name2 in HTML_NAMED_CHARACTER_REFERENCES;
+  }
+  function getNamedCharacterReference(name2) {
+    return HTML_NAMED_CHARACTER_REFERENCES[name2];
   }
   function isValidCharacterReference(text) {
     if (!text.startsWith("&") || !text.endsWith(";"))
@@ -47109,6 +47839,50 @@ var HerbLinter = (() => {
     if (text.startsWith("&#"))
       return /^&#[0-9]+;$/.test(text);
     return isNamedCharacterReference(text.slice(1, -1));
+  }
+  var expectedFunctions = [
+    "parse",
+    "lex",
+    "diff",
+    "extractRuby",
+    "extractHTML",
+    "parseRuby",
+    "version"
+  ];
+  function _TYPECHECK() {
+    const checkFunctionsExist = true;
+    const checkInterfaceComplete = true;
+    return { checkFunctionsExist, checkInterfaceComplete };
+  }
+  function isLibHerbBackend(object, libherbpath = "unknown") {
+    for (const expectedFunction of expectedFunctions) {
+      if (object[expectedFunction] === void 0) {
+        throw new Error(`Libherb at "${libherbpath}" doesn't expose function "${expectedFunction}".`);
+      }
+      if (typeof object[expectedFunction] !== "function") {
+        throw new Error(`Libherb at "${libherbpath}" has "${expectedFunction}" but it's not a function.`);
+      }
+    }
+    return true;
+  }
+  function ensureLibHerbBackend(object, libherbpath = "unknown") {
+    isLibHerbBackend(object, libherbpath);
+    return object;
+  }
+  function deserializeDiagnostic(diagnostic) {
+    return { ...diagnostic, location: Location.from(diagnostic.location) };
+  }
+  function toMonacoDiagnostic(diagnostic) {
+    const { message, location } = diagnostic;
+    const severity = diagnostic.severity === "hint" ? "info" : diagnostic.severity;
+    return {
+      line: location.start.line,
+      column: location.start.column,
+      endLine: location.end.line,
+      endColumn: location.end.column,
+      message,
+      severity
+    };
   }
   function levenshtein(a, b) {
     function _min(d02, d12, d22, bx, ay2) {
@@ -47204,6 +47978,242 @@ var HerbLinter = (() => {
       return null;
     return closest.item;
   }
+  function didyoumeanRanked(input, list, threshold) {
+    if (list.length === 0)
+      return [];
+    const scores = rank(input, list);
+    if (threshold !== void 0) {
+      return scores.filter((result) => result.score <= threshold);
+    }
+    return scores;
+  }
+  var DEFAULT_EXTRACT_RUBY_OPTIONS = {
+    semicolons: true,
+    comments: false,
+    preserve_positions: true
+  };
+  var name = "@herb-tools/core";
+  var version = "0.10.3";
+  var packageJSON = {
+    name,
+    version
+  };
+  function ensureString(object) {
+    if (typeof object === "string") {
+      return object;
+    }
+    throw new TypeError("Argument must be a string");
+  }
+  var TokenList = class _TokenList {
+    list;
+    static from(list) {
+      return new _TokenList(list.map((token) => Token.from(token)));
+    }
+    constructor(list) {
+      this.list = list;
+    }
+    get length() {
+      return this.list.length;
+    }
+    get tokens() {
+      return this.list;
+    }
+    [Symbol.iterator]() {
+      return this.list[Symbol.iterator]();
+    }
+    at(index) {
+      return this.list.at(index);
+    }
+    forEach(callback) {
+      this.list.forEach(callback);
+    }
+    map(callback) {
+      return this.list.map(callback);
+    }
+    filter(predicate) {
+      return this.list.filter(predicate);
+    }
+    __getobj__() {
+      return this.list;
+    }
+    inspect() {
+      return this.list.map((token) => token.inspect()).join("\n") + "\n";
+    }
+    toString() {
+      return this.inspect();
+    }
+  };
+  var LexResult = class _LexResult extends Result {
+    /** The list of tokens generated from the source code. */
+    value;
+    /**
+     * Creates a `LexResult` instance from a serialized result.
+     * @param result - The serialized lexical result containing tokens, source, warnings, and errors.
+     * @returns A new `LexResult` instance.
+     */
+    static from(result) {
+      return new _LexResult(TokenList.from(result.tokens || []), result.source, result.warnings.map((warning) => HerbWarning.from(warning)), result.errors.map((error) => HerbError.from(error)));
+    }
+    /**
+     * Constructs a new `LexResult`.
+     * @param value - The list of tokens.
+     * @param source - The source code that was lexed.
+     * @param warnings - An array of warnings encountered during lexing.
+     * @param errors - An array of errors encountered during lexing.
+     */
+    constructor(value, source, warnings = [], errors = []) {
+      super(source, warnings, errors);
+      this.value = value;
+    }
+    /**
+     * Determines if the lexing was successful.
+     * @returns `true` if there are no errors, otherwise `false`.
+     */
+    get successful() {
+      return this.errors.length === 0;
+    }
+    /**
+     * Determines if the lexing failed.
+     * @returns `true` if there are errors, otherwise `false`.
+     */
+    get failed() {
+      return this.errors.length > 0;
+    }
+    /**
+     * Converts the `LexResult` to a JSON representation.
+     * @returns An object containing the token list, source, warnings, and errors.
+     */
+    toJSON() {
+      return {
+        value: this.value,
+        source: this.source,
+        warnings: this.warnings,
+        errors: this.errors
+      };
+    }
+  };
+  var HerbBackend = class {
+    /** The backend instance handling lexing and parsing. */
+    backend = void 0;
+    backendPromise;
+    /**
+     * Creates a new Herb instance.
+     * @param backendPromise - A promise resolving to a `LibHerbBackend` implementation for lexing and parsing.
+     * @throws Error if no valid backend is provided.
+     */
+    constructor(backendPromise) {
+      if (!backendPromise) {
+        throw new Error("No LibHerb backend provided");
+      }
+      this.backendPromise = backendPromise;
+    }
+    /**
+     * Loads the backend by resolving the backend promise.
+     * @returns A promise containing the resolved `HerbBackend` instance after loading it.
+     */
+    async load() {
+      const backend = await this.backendPromise();
+      this.backend = backend;
+      return this;
+    }
+    /**
+     * Lexes the given source string into a `LexResult`.
+     * @param source - The source code to lex.
+     * @returns A `LexResult` instance.
+     * @throws Error if the backend is not loaded.
+     */
+    lex(source) {
+      this.ensureBackend();
+      return LexResult.from(this.backend.lex(ensureString(source)));
+    }
+    /**
+     * Parses the given source string into a `ParseResult`.
+     * @param source - The source code to parse.
+     * @param options - Optional parsing options.
+     * @returns A `ParseResult` instance.
+     * @throws Error if the backend is not loaded.
+     */
+    parse(source, options) {
+      this.ensureBackend();
+      const mergedOptions = { ...DEFAULT_PARSER_OPTIONS, ...options };
+      return ParseResult2.from(this.backend.parse(ensureString(source), mergedOptions));
+    }
+    /**
+     * Extracts embedded Ruby code from the given source.
+     * @param source - The source code to extract Ruby from.
+     * @param options - Optional extraction options.
+     * @returns The extracted Ruby code as a string.
+     * @throws Error if the backend is not loaded.
+     */
+    extractRuby(source, options) {
+      this.ensureBackend();
+      const mergedOptions = { ...DEFAULT_EXTRACT_RUBY_OPTIONS, ...options };
+      return this.backend.extractRuby(ensureString(source), mergedOptions);
+    }
+    /**
+     * Parses a Ruby source string using Prism via the libherb backend.
+     * @param source - The Ruby source code to parse.
+     * @returns A Prism ParseResult containing the AST.
+     * @throws Error if the backend is not loaded.
+     */
+    parseRuby(source) {
+      this.ensureBackend();
+      const bytes = this.backend.parseRuby(ensureString(source));
+      if (!bytes) {
+        throw new Error("Failed to parse Ruby source");
+      }
+      return deserializePrismParseResult(bytes, source);
+    }
+    /**
+     * Diffs two source strings and returns the minimal set of AST differences.
+     * @param oldSource - The old source code.
+     * @param newSource - The new source code.
+     * @returns A DiffResult containing the operations.
+     * @throws Error if the backend is not loaded.
+     */
+    diff(oldSource, newSource) {
+      this.ensureBackend();
+      return this.backend.diff(ensureString(oldSource), ensureString(newSource));
+    }
+    /**
+     * Extracts HTML from the given source.
+     * @param source - The source code to extract HTML from.
+     * @returns The extracted HTML as a string.
+     * @throws Error if the backend is not loaded.
+     */
+    extractHTML(source) {
+      this.ensureBackend();
+      return this.backend.extractHTML(ensureString(source));
+    }
+    /**
+     * Gets the Herb version information, including the core and backend versions.
+     * @returns A version string containing backend, core, and libherb versions.
+     * @throws Error if the backend is not loaded.
+     */
+    get version() {
+      this.ensureBackend();
+      const backend = this.backendVersion();
+      const core = `${packageJSON.name}@${packageJSON.version}`;
+      const libherb = this.backend.version();
+      return `${backend}, ${core}, ${libherb}`;
+    }
+    /**
+     * Ensures that the backend is loaded.
+     * @throws Error if the backend is not loaded.
+     */
+    ensureBackend() {
+      if (!this.isLoaded) {
+        throw new Error("Herb backend is not loaded. Call `await Herb.load()` first.");
+      }
+    }
+    /**
+     * Checks if the backend is loaded.
+     * @returns True if the backend is loaded, false otherwise.
+     */
+    get isLoaded() {
+      return this.backend !== void 0;
+    }
+  };
   var Visitor2 = class {
     visit(node) {
       if (!node)
@@ -48377,8 +49387,8 @@ var HerbLinter = (() => {
     static ruleName;
     /** The version in which this rule was introduced. Used for version-gated rule filtering. */
     static introducedIn;
-    static version(version) {
-      return version;
+    static version(version2) {
+      return version2;
     }
     /** Indicates whether this rule supports autofix. Defaults to false. */
     static autocorrectable = false;
@@ -48432,8 +49442,8 @@ var HerbLinter = (() => {
     static ruleName;
     /** The version in which this rule was introduced. Used for version-gated rule filtering. */
     static introducedIn;
-    static version(version) {
-      return version;
+    static version(version2) {
+      return version2;
     }
     /** Indicates whether this rule supports autofix. Defaults to false. */
     static autocorrectable = false;
@@ -48591,8 +49601,8 @@ var HerbLinter = (() => {
      */
     isInsideElement(...tagNames) {
       return this.elementStack.some((element) => {
-        const name = getTagLocalName(element);
-        return name !== null && tagNames.includes(name);
+        const name2 = getTagLocalName(element);
+        return name2 !== null && tagNames.includes(name2);
       });
     }
     /**
@@ -52349,9 +53359,9 @@ ${indent}`);
       const localNames = new Set(previousLocalNames);
       for (const argument of node.block_arguments) {
         if (isRubyParameterNode(argument)) {
-          const name = argument.name?.value;
-          if (name) {
-            localNames.add(name);
+          const name2 = argument.name?.value;
+          if (name2) {
+            localNames.add(name2);
           }
         }
       }
@@ -61734,8 +62744,8 @@ ${indent}`);
     if (afterPrefix.length === 0)
       return null;
     const rulesString = afterPrefix.trimEnd();
-    const ruleNames = rulesString.split(",").map((name) => name.trim());
-    if (ruleNames.some((name) => name.length === 0))
+    const ruleNames = rulesString.split(",").map((name2) => name2.trim());
+    if (ruleNames.some((name2) => name2.length === 0))
       return null;
     if (ruleNames.length === 0)
       return null;
@@ -61776,8 +62786,8 @@ ${indent}`);
     if (afterPrefix.length === 0)
       return null;
     const rulesString = afterPrefix.trimEnd();
-    const ruleNames = rulesString.split(",").map((name) => name.trim());
-    if (ruleNames.some((name) => name.length === 0))
+    const ruleNames = rulesString.split(",").map((name2) => name2.trim());
+    if (ruleNames.some((name2) => name2.length === 0))
       return null;
     if (ruleNames.length === 0)
       return null;
@@ -62007,7 +63017,7 @@ ${indent}`);
       const unnecessaryRules = herbDisable.ruleNameDetails.filter((detail) => this.validRuleNames.has(detail.name) && !usedRuleNames.has(detail.name));
       if (unnecessaryRules.length === 0)
         return;
-      const validRuleCount = herbDisable.ruleNames.filter((name) => this.validRuleNames.has(name)).length;
+      const validRuleCount = herbDisable.ruleNames.filter((name2) => this.validRuleNames.has(name2)).length;
       if (unnecessaryRules.length === validRuleCount) {
         if (unnecessaryRules.length === 1) {
           const ruleName = unnecessaryRules[0].name;
@@ -63570,13 +64580,13 @@ ${indent}`);
       if (!isHTMLOpenTagNode(node.open_tag))
         return;
       forEachAttribute(node.open_tag, (attributeNode) => {
-        const name = getAttributeName(attributeNode);
+        const name2 = getAttributeName(attributeNode);
         const value = getAttributeValue(attributeNode)?.trim();
-        if (name === "name" && value) {
+        if (name2 === "name" && value) {
           metaTag.nameValue = value;
-        } else if (name === "http-equiv" && value) {
+        } else if (name2 === "http-equiv" && value) {
           metaTag.httpEquivValue = value;
-        } else if (name === "media" && value) {
+        } else if (name2 === "media" && value) {
           metaTag.mediaValue = value;
         }
       });
@@ -63698,8 +64708,8 @@ ${indent}`);
       this.checkEmptyAttribute(attributeName, attributeValue, attributeNode);
     }
     checkDynamicAttributeStaticValue({ combinedName, attributeValue, attributeNode }) {
-      const name = (combinedName || "").toLowerCase();
-      this.checkEmptyAttribute(name, attributeValue, attributeNode);
+      const name2 = (combinedName || "").toLowerCase();
+      this.checkEmptyAttribute(name2, attributeValue, attributeNode);
     }
     checkEmptyAttribute(attributeName, attributeValue, attributeNode) {
       if (!isRestrictedAttribute(attributeName))
@@ -64512,11 +65522,11 @@ ${indent}`);
         return true;
       return typeValue === "text/javascript" || typeValue === "application/javascript";
     }
-    findAttribute(node, name) {
+    findAttribute(node, name2) {
       if (isERBOpenTagNode(node.open_tag)) {
-        return findAttributeByName(node.open_tag.children, name);
+        return findAttributeByName(node.open_tag.children, name2);
       }
-      return getAttribute(node, name);
+      return getAttribute(node, name2);
     }
   };
   var HTMLRequireScriptNonceRule = class extends ParserRule {
@@ -64957,8 +65967,8 @@ ${indent}`);
 
   // node_modules/@herb-tools/linter/dist/semver.js
   var UNRELEASED_VERSION = "unreleased";
-  function parseSemver(version) {
-    const parts = version.split(".");
+  function parseSemver(version2) {
+    const parts = version2.split(".");
     if (parts.length < 2 || parts.length > 3) {
       return [0, 0, 0];
     }

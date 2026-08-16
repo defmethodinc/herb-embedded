@@ -19,7 +19,11 @@ module Herb
         end
 
         def attach(name, &block)
-          @context.attach(name, block)
+          wrapped = proc do |*args|
+            result = block.call(*args)
+            result.is_a?(Binary) ? ::MiniRacer::Binary.new(result.raw) : result
+          end
+          @context.attach(name, wrapped)
           self
         end
 

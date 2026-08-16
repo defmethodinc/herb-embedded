@@ -45,7 +45,7 @@ module Herb
         result = Herb.lex(source)
 
         {
-          value: result.value,
+          tokens: result.value,
           source: result.source,
           warnings: result.warnings,
           errors: result.errors,

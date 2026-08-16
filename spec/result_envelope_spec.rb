@@ -54,12 +54,12 @@ RSpec.describe Herb::Embedded::ResultEnvelope do
   end
 
   describe ".lex" do
-    it "returns the equivalent envelope shape for Herb.lex" do
+    it "returns the envelope shape LexResult.from() expects" do
       json = described_class.lex("<div>hi</div>")
       envelope = JSON.parse(json)
 
-      expect(envelope.keys).to contain_exactly("value", "source", "warnings", "errors")
-      expect(envelope["value"]).not_to be_empty
+      expect(envelope.keys).to contain_exactly("tokens", "source", "warnings", "errors")
+      expect(envelope["tokens"]).not_to be_empty
       expect(envelope["source"]).to eq("<div>hi</div>")
     end
   end
