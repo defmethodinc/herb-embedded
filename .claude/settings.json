@@ -6,6 +6,10 @@
           {
             "command": "bd prime --hook-json",
             "type": "command"
+          },
+          {
+            "command": "echo '## Last handoff'; cat docs/handoffs/latest.md 2>/dev/null || echo '(none)'",
+            "type": "command"
           }
         ],
         "matcher": ""
