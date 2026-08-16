@@ -1,4 +1,13 @@
 
+# Ruby / Bundler
+/.bundle/
+/Gemfile.lock
+/pkg/
+*.gem
+.yardoc/
+/doc/
+/coverage/
+
 # Beads / Dolt files (added by bd init)
 .dolt/
 *.db
