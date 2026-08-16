@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Edit",
+      "Write",
+      "Bash(bundle install*)",
+      "Bash(bundle exec*)",
+      "Bash(bundle update*)",
+      "Bash(rake*)",
+      "Bash(ruby -v)",
+      "Bash(gem list*)",
+      "Bash(gem build*)"
+    ]
+  }
+}
