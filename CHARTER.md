@@ -101,6 +101,13 @@ already sitting in the `herb` gem's native C extension the whole time.
 - **Testing is RSpec.** The original implementation plan specified minitest, but the repo has
   used RSpec consistently since Task 1 — every spec file, the Gemfile, and the Rakefile agree
   on it. Recorded here as the actual decision, superseding the plan.
+- **Value objects are immutable; aggregators are the one deliberate exception.**
+  `Diagnostic` and `LintResult` take a keyword-arg initializer and expose only `attr_reader`s
+  — no setters, nothing that mutates after construction. `Report` breaks that rule on
+  purpose: it accumulates `LintResult`s via `#add` as a run processes files one at a time, and
+  building it any other way would mean holding every file's results in memory before
+  constructing it, for no benefit. This is a scoped exception for things whose job is
+  collecting results over a run — not a license to make arbitrary objects mutable.
 - **Supply-chain controls live at the one place third-party code enters the process:** the
   scheduled bundle-rebuild job. Pin by npm integrity hash (not version string alone), a human
   reads the bundle diff before merge, and autofix output — the one thing the sandboxed engine
