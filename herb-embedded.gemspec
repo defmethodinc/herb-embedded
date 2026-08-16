@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
     "changelog_uri" => "https://github.com/defmethodinc/herb-embedded/blob/main/CHANGELOG.md",
     "source_code_uri" => "https://github.com/defmethodinc/herb-embedded",
     "homepage_uri" => "https://github.com/defmethodinc/herb-embedded",
-    "rubygems_mfa_required" => "true"
+    "rubygems_mfa_required" => "true",
   }
 
   spec.add_dependency "herb", "~> 0.10.3"

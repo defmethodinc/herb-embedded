@@ -7,16 +7,16 @@ RSpec.describe Herb::Embedded::ResultEnvelope do
   describe "::FORWARDABLE_OPTIONS" do
     it "matches the documented allowlist derived from Herb::ParserOptions" do
       expect(described_class::FORWARDABLE_OPTIONS).to eq(%i[
-        strict
-        track_whitespace
-        track_locations
-        analyze
-        action_view_helpers
-        transform_conditionals
-        render_nodes
-        strict_locals
-        iteration_nodes
-      ])
+                                                           strict
+                                                           track_whitespace
+                                                           track_locations
+                                                           analyze
+                                                           action_view_helpers
+                                                           transform_conditionals
+                                                           render_nodes
+                                                           strict_locals
+                                                           iteration_nodes
+                                                         ])
     end
   end
 

@@ -9,12 +9,12 @@ module Herb
       # Reference EngineAdapter backed by mini_racer (bundled V8).
       class MiniRacer < EngineAdapter
         def initialize
-          super()
+          super
           @context = ::MiniRacer::Context.new
         end
 
-        def load(js)
-          @context.eval(js)
+        def load(source)
+          @context.eval(source)
           self
         end
 
@@ -23,9 +23,9 @@ module Herb
           self
         end
 
-        def call(fn, *args)
+        def call(function, *args)
           converted = args.map { |arg| arg.is_a?(Binary) ? arg.raw.bytes : arg }
-          @context.call(fn, *converted)
+          @context.call(function, *converted)
         end
 
         def dispose
