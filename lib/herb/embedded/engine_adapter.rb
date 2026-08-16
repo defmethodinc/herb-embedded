@@ -15,15 +15,15 @@ module Herb
         Binary.new(bytes)
       end
 
-      def load(js)
+      def load(source)
         raise NotImplementedError, "#{self.class} must implement #load"
       end
 
-      def attach(name, &block)
+      def attach(name, &)
         raise NotImplementedError, "#{self.class} must implement #attach"
       end
 
-      def call(fn, *args)
+      def call(function, *args)
         raise NotImplementedError, "#{self.class} must implement #call"
       end
 
