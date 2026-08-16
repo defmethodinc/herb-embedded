@@ -20,4 +20,7 @@ allowed-tools: Bash(bundle:*), Bash(rake*), Bash(git:*), Bash(gh:*), Bash(bd:*)
    bead $ARGUMENTS. Body lists each acceptance criterion with a one-line
    note on how it was satisfied.
 
+Never stash, and never switch branches. If the working tree contains changes
+unrelated to this bead, stop and tell me.
+
 Do not run `bd close`. The bead closes after merge, not after the PR opens.
