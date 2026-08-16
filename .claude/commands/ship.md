@@ -1,14 +1,13 @@
 ---
 description: Gate locally, then push and open a non-draft PR
-argument-hint: [issue-number]
-allowed-tools: Bash(bundle:*), Bash(rake*), Bash(git:*), Bash(gh:*)
-disable-model-invocation: true
+argument-hint: [bead-id]
+allowed-tools: Bash(bundle:*), Bash(rake*), Bash(git:*), Bash(gh:*), Bash(bd:*)
 ---
 
 ## Context
 - Branch: !`git branch --show-current`
 - Status: !`git status --short`
-- Issue: !`gh issue view $ARGUMENTS`
+- Bead: !`bd show $ARGUMENTS`
 
 ## Task
 
@@ -18,5 +17,7 @@ disable-model-invocation: true
 3. Re-run the gate after rebasing.
 4. Push the branch.
 5. Open a PR with `gh pr create`. Never use `--draft`. Title references
-   issue #$ARGUMENTS. Body lists each acceptance criterion with a one-line
-   note on how it was satisfied, and ends with `Closes #$ARGUMENTS`.
+   bead $ARGUMENTS. Body lists each acceptance criterion with a one-line
+   note on how it was satisfied.
+
+Do not run `bd close`. The bead closes after merge, not after the PR opens.
