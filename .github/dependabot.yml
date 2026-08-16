@@ -1,0 +1,25 @@
+version: 2
+updates:
+  - package-ecosystem: bundler
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      development-dependencies:
+        dependency-type: development
+    cooldown:
+      semver-patch-days: 2
+      semver-minor-days: 3
+      semver-major-days: 7
+      default-days: 7
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 7
