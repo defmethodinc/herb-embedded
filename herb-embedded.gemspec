@@ -20,5 +20,6 @@ Gem::Specification.new do |spec|
     "rubygems_mfa_required" => "true"
   }
 
+  spec.add_dependency "herb", "~> 0.10.3"
   spec.add_dependency "mini_racer", "~> 0.22"
 end
