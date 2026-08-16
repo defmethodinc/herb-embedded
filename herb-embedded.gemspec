@@ -12,8 +12,13 @@ Gem::Specification.new do |spec|
   spec.files = Dir["lib/**/*.rb"]
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "mini_racer", "~> 0.22"
+  spec.metadata = {
+    "bug_tracker_uri" => "https://github.com/defmethodinc/herb-embedded/issues",
+    "changelog_uri" => "https://github.com/defmethodinc/herb-embedded/blob/main/CHANGELOG.md",
+    "source_code_uri" => "https://github.com/defmethodinc/herb-embedded",
+    "homepage_uri" => "https://github.com/defmethodinc/herb-embedded",
+    "rubygems_mfa_required" => "true"
+  }
 
-  spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rspec", "~> 3.13"
+  spec.add_dependency "mini_racer", "~> 0.22"
 end

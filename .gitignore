@@ -1,7 +1,6 @@
 
 # Ruby / Bundler
 /.bundle/
-/Gemfile.lock
 /pkg/
 *.gem
 .yardoc/
