@@ -18,13 +18,11 @@ module Herb
       FORWARDABLE_OPTIONS = %i[
         strict
         track_whitespace
-        track_locations
         analyze
         action_view_helpers
         transform_conditionals
         render_nodes
         strict_locals
-        iteration_nodes
       ].freeze
 
       module_function
