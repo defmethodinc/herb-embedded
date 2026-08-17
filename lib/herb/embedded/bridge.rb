@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require "json"
 require "prism"
 require_relative "engine_adapter"
 require_relative "result_envelope"
+require_relative "diagnostic"
 
 module Herb
   module Embedded
@@ -55,6 +57,17 @@ module Herb
       def backend_version
         ensure_booted!
         @adapter.call("__herbEmbeddedVersion")
+      end
+
+      def rule_names
+        ensure_booted!
+        @adapter.call("__herbRuleNames")
+      end
+
+      def lint(source, file:, rules: nil)
+        ensure_booted!
+        offenses = JSON.parse(@adapter.call("__herbLint", source, file, rules))
+        offenses.map { |offense| Diagnostic.from_js(offense, file: file) }
       end
 
       def dispose
