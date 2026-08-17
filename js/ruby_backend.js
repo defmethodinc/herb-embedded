@@ -76,6 +76,40 @@ function __herbSelectRules(ruleNames) {
   });
 }
 
+// Registers a custom rule from Ruby-rewritten source (see
+// CustomRuleLoader.rewrite): an IIFE expression that destructures its
+// base class from HerbLinter and returns the rule class. A rule sharing
+// a ruleName with an existing one (built-in or previously-registered
+// custom) replaces it in place, matching upstream's override behavior —
+// the caller (CustomRuleLoader#load_all) is told via `overrode` so it can
+// warn on the Ruby side.
+function __herbRegisterCustomRule(rewrittenSource, path) {
+  var RuleClass;
+
+  try {
+    RuleClass = eval(rewrittenSource);
+  } catch (e) {
+    throw new Error("Failed to evaluate custom rule at " + path + ": " + (e && e.message ? e.message : String(e)));
+  }
+
+  if (!RuleClass || typeof RuleClass !== "function" || typeof RuleClass.ruleName !== "string" || typeof RuleClass.prototype.check !== "function") {
+    throw new Error("No valid default export found in " + path + ". Custom rules must use default export.");
+  }
+
+  var existingIndex = HerbLinter.rules.findIndex(function (ruleClass) {
+    return ruleClass.ruleName === RuleClass.ruleName;
+  });
+  var overrode = existingIndex !== -1;
+
+  if (overrode) {
+    HerbLinter.rules.splice(existingIndex, 1, RuleClass);
+  } else {
+    HerbLinter.rules.push(RuleClass);
+  }
+
+  return { ruleName: RuleClass.ruleName, overrode: overrode };
+}
+
 // One Linter per selected rule, each in its own try/catch: a rule that
 // throws must not abort the run (spike 2 finding) — the real Linter#lint
 // has no such isolation internally, since it runs every selected rule's
