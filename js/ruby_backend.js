@@ -110,6 +110,20 @@ function __herbRegisterCustomRule(rewrittenSource, path) {
   return { ruleName: RuleClass.ruleName, overrode: overrode };
 }
 
+// A single Linter across all selected rules, matching upstream's own
+// lint-then-fix composition (Linter#autofix mutates a running source as
+// it walks offenses from every selected rule together, unlike #lint's
+// per-rule crash isolation). The parse-doesn't-break safety check lives
+// on the Ruby side (Bridge#autofix), since it just needs Herb.parse.
+function __herbAutofix(source, file, ruleNames, includeUnsafe) {
+  var ruleClasses = __herbSelectRules(ruleNames);
+  var context = { fileName: file, filename: file };
+  var linter = new HerbLinter.Linter(__herbEmbeddedBridge.instance, ruleClasses);
+  var result = linter.autofix(source, context, undefined, { includeUnsafe: !!includeUnsafe });
+
+  return JSON.stringify({ source: result.source, fixed: result.fixed });
+}
+
 // One Linter per selected rule, each in its own try/catch: a rule that
 // throws must not abort the run (spike 2 finding) — the real Linter#lint
 // has no such isolation internally, since it runs every selected rule's

@@ -75,6 +75,22 @@ module Herb
         @adapter.call("__herbRegisterCustomRule", source, path)
       end
 
+      # A formatter-adjacent tool must never write source that fails to
+      # parse into a user's working tree. If the fixed output fails to
+      # parse while the original input parsed cleanly, the fix is
+      # discarded rather than trusted.
+      def autofix(source, file:, rules: nil, unsafe: false)
+        ensure_booted!
+        raw = JSON.parse(@adapter.call("__herbAutofix", source, file, rules, unsafe))
+
+        if source_parses?(source) && !source_parses?(raw["source"])
+          return { source: source, applied: [], discarded: true }
+        end
+
+        applied = raw["fixed"].map { |offense| Diagnostic.from_js(offense, file: file) }
+        { source: raw["source"], applied: applied, discarded: false }
+      end
+
       def dispose
         @adapter.dispose
       end
@@ -96,6 +112,10 @@ module Herb
 
       def symbolize(hash)
         (hash || {}).transform_keys(&:to_sym)
+      end
+
+      def source_parses?(source)
+        JSON.parse(ResultEnvelope.parse(source, {}))["errors"].empty?
       end
     end
   end
