@@ -1812,7 +1812,10 @@ var HerbLinter = (() => {
     DEFAULT_CONFIG: () => DEFAULT_CONFIG,
     DEFAULT_EXTRACT_RUBY_OPTIONS: () => DEFAULT_EXTRACT_RUBY_OPTIONS,
     DEFAULT_FRAMEWORK: () => DEFAULT_FRAMEWORK,
+    DEFAULT_LINTER_PARSER_OPTIONS: () => DEFAULT_LINTER_PARSER_OPTIONS,
+    DEFAULT_LINT_CONTEXT: () => DEFAULT_LINT_CONTEXT,
     DEFAULT_PARSER_OPTIONS: () => DEFAULT_PARSER_OPTIONS,
+    DEFAULT_RULE_CONFIG: () => DEFAULT_RULE_CONFIG,
     DEFAULT_TEMPLATE_ENGINE: () => DEFAULT_TEMPLATE_ENGINE,
     DocumentNode: () => DocumentNode,
     DotNotationCasingError: () => DotNotationCasingError,
@@ -1864,6 +1867,7 @@ var HerbLinter = (() => {
     HerbWarning: () => HerbWarning,
     InvalidCommentClosingTagError: () => InvalidCommentClosingTagError,
     LexResult: () => LexResult,
+    LexerRule: () => LexerRule,
     Linter: () => Linter,
     LiteralNode: () => LiteralNode,
     Location: () => Location,
@@ -1877,6 +1881,7 @@ var HerbLinter = (() => {
     OmittedClosingTagError: () => OmittedClosingTagError,
     ParseResult: () => ParseResult2,
     ParserOptions: () => ParserOptions,
+    ParserRule: () => ParserRule,
     Position: () => Position,
     PrismBasicVisitor: () => PrismBasicVisitor,
     PrismNodes: () => nodes_exports,
@@ -1896,6 +1901,7 @@ var HerbLinter = (() => {
     RubyParseError: () => RubyParseError,
     RubyRenderKeywordsNode: () => RubyRenderKeywordsNode,
     RubyRenderLocalNode: () => RubyRenderLocalNode,
+    SourceRule: () => SourceRule,
     StrayERBClosingTagError: () => StrayERBClosingTagError,
     StrictLocalsBlockArgumentError: () => StrictLocalsBlockArgumentError,
     StrictLocalsDuplicateDeclarationError: () => StrictLocalsDuplicateDeclarationError,
@@ -49427,6 +49433,37 @@ var HerbLinter = (() => {
         rule: this.ruleName,
         code: this.ruleName,
         source: "linter"
+      };
+    }
+  };
+  var LexerRule = class {
+    static type = "lexer";
+    static ruleName;
+    /** The version in which this rule was introduced. Used for version-gated rule filtering. */
+    static introducedIn;
+    static version(version2) {
+      return version2;
+    }
+    /** Indicates whether this rule supports autofix. Defaults to false. */
+    static autocorrectable = false;
+    /** Indicates whether this rule supports unsafe autofix (requires --fix-unsafely). Defaults to false. */
+    static unsafeAutocorrectable = false;
+    get ruleName() {
+      return this.constructor.ruleName;
+    }
+    get defaultConfig() {
+      return DEFAULT_RULE_CONFIG;
+    }
+    createOffense(message, location, autofixContext, severity, tags) {
+      return {
+        rule: this.ruleName,
+        code: this.ruleName,
+        source: "Herb Linter",
+        message,
+        location,
+        autofixContext,
+        severity,
+        tags
       };
     }
   };

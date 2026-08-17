@@ -70,6 +70,11 @@ module Herb
         offenses.map { |offense| Diagnostic.from_js(offense, file: file) }
       end
 
+      def register_custom_rule(source, path)
+        ensure_booted!
+        @adapter.call("__herbRegisterCustomRule", source, path)
+      end
+
       def dispose
         @adapter.dispose
       end
