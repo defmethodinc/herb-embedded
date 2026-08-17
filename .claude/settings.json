@@ -14,6 +14,17 @@
         ],
         "matcher": ""
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "command": ".claude/hooks/bd-sync.sh",
+            "type": "command"
+          }
+        ]
+      }
     ]
   },
   "permissions": {
