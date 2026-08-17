@@ -58,3 +58,47 @@ __herbEmbeddedBridge.instance
   .catch(function (e) {
     __herbEmbeddedBridge.error = String(e && e.message ? e.message : e);
   });
+
+function __herbRuleNames() {
+  return HerbLinter.rules.map(function (ruleClass) {
+    return ruleClass.ruleName;
+  });
+}
+
+// Rule selection happens before execution: Linter's constructor takes an
+// explicit rules array, so an unselected rule is never instantiated or
+// checked, not merely filtered out of the offenses it already produced.
+function __herbSelectRules(ruleNames) {
+  var wanted = ruleNames && ruleNames.length ? ruleNames : null;
+
+  return HerbLinter.rules.filter(function (ruleClass) {
+    return !wanted || wanted.indexOf(ruleClass.ruleName) !== -1;
+  });
+}
+
+// One Linter per selected rule, each in its own try/catch: a rule that
+// throws must not abort the run (spike 2 finding) — the real Linter#lint
+// has no such isolation internally, since it runs every selected rule's
+// check() in one uncaught loop.
+function __herbLint(source, file, ruleNames) {
+  var ruleClasses = __herbSelectRules(ruleNames);
+  var context = { fileName: file, filename: file };
+  var offenses = [];
+
+  ruleClasses.forEach(function (ruleClass) {
+    try {
+      var linter = new HerbLinter.Linter(__herbEmbeddedBridge.instance, [ruleClass]);
+      var result = linter.lint(source, context);
+      offenses = offenses.concat(result.offenses);
+    } catch (e) {
+      offenses.push({
+        rule: ruleClass.ruleName,
+        message: "Rule '" + ruleClass.ruleName + "' crashed: " + (e && e.message ? e.message : String(e)),
+        severity: "error",
+        location: null,
+      });
+    }
+  });
+
+  return JSON.stringify(offenses);
+}
