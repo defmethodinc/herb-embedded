@@ -15,18 +15,22 @@ Node anywhere. Full rationale and scope in [CHARTER.md](CHARTER.md).
 
 ## Install
 
-Not yet published to rubygems.org — add it straight from GitHub:
-
 ```ruby
 # Gemfile
-gem "herb-embedded", git: "https://github.com/defmethodinc/herb-embedded.git"
+gem "herb-embedded"
 ```
 
 ```bash
 bundle install
 ```
 
-Or build and install it locally from a clone:
+Or without Bundler:
+
+```bash
+gem install herb-embedded
+```
+
+To try an unreleased change from a clone instead of the published gem:
 
 ```bash
 git clone https://github.com/defmethodinc/herb-embedded.git
