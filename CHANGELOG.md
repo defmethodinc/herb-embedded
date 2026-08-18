@@ -11,8 +11,8 @@ Follows [Semantic Versioning](https://semver.org/). Gem version mirrors the vend
 
 ---
 
-## v0.10.3.0 / TBD
+## v0.10.3.0 / 18 August 2026
 
 ### Added
 
-* Initial release. All 107 Herb lint rules and autofix, no Node required.
+* Initial release. All 100 Herb lint rules and autofix, no Node required.
