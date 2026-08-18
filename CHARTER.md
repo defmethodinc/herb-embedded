@@ -157,11 +157,18 @@ already sitting in the `herb` gem's native C extension the whole time.
    `herb-lint-rb` are the current names. If Marco's gem claims `Herb::Linter` or a
    conflicting convention before herb-embedded sunsets, a rename may be needed in the
    meantime — low stakes given the planned sunset, but worth a glance when his gem surfaces.
-3. **Conformance punch list isn't closed.** The design spec's differential run against
-   `npx @herb-tools/linter` wasn't yet clean end-to-end — missing `LintContext` (filename),
-   missing `.herb.yml` config application, and per-rule `parserOptions` forwarding. Each has
-   a named cause and is tracked as implementation work in `bd` (see `herb-embedded-6dp` and
-   related beads), not a design gap.
+3. **Conformance punch list, fixture-coverage dimension: closed.** The design spec's
+   differential run against `npx @herb-tools/linter` originally wasn't clean end-to-end —
+   missing `LintContext` (filename), missing `.herb.yml` config application, and per-rule
+   `parserOptions` forwarding. `LintContext` and `parserOptions` forwarding (including
+   `prism_program`/`prism_nodes`, see the Shape decisions entry above) are resolved; each had
+   a named cause tracked as implementation work in `bd` (`herb-embedded-6dp` and related
+   beads), not a design gap. `spec/conformance/conformance_spec.rb` now runs the differential
+   offense-for-offense diff against a hand-written fixture for every one of the 100 rules the
+   vendored bundle registers (`herb-embedded-ag7`), gated so an upstream rule with no fixture
+   fails the build — not just the 5 general-purpose fixtures from before. `.herb.yml` config
+   application is unaffected by that work and still worth a look if it's ever suspected of
+   drifting from upstream.
 4. **Config schema stability.** `.herb.yml` config currently passes through to the engine
    whole. Per-rule options can change across Herb releases, so Ruby may eventually need
    version-aware translation instead of passthrough. Unresolved until it's actually observed
