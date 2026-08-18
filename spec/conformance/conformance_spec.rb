@@ -25,10 +25,15 @@ RSpec.describe "Conformance against npx @herb-tools/linter" do
 
   def reference_offenses(fixture_path)
     stdout, stderr, status = Open3.capture3(
-      CONFORMANCE_REFERENCE_LINTER, fixture_path, "--json", "--no-custom-rules", "--no-color", chdir: CONFORMANCE_ROOT
+      CONFORMANCE_REFERENCE_LINTER, fixture_path, "--json", "--no-custom-rules", "--no-color", "--jobs", "1",
+      chdir: CONFORMANCE_ROOT
     )
     unless status.exitstatus.zero? || status.exitstatus == 1
       raise "reference herb-lint failed (exit #{status.exitstatus}): #{stderr}"
+    end
+
+    if stdout.strip.empty?
+      raise "reference herb-lint produced no output (exit #{status.exitstatus}); stderr: #{stderr.empty? ? "(empty)" : stderr}"
     end
 
     JSON.parse(stdout)["offenses"].map { |o| [o["code"], o["location"]["start"]["line"], o["location"]["start"]["column"]] }
