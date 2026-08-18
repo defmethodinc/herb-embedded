@@ -29,6 +29,39 @@ var libHerbBackend = {
   },
 };
 
+// rbParse (via ResultEnvelope#inject_prism_nodes) injects prism_node bytes
+// produced by Ruby's Prism.dump, which always serializes a whole
+// ProgramNode — there is no public API to dump an arbitrary sub-node
+// directly. But every prism_nodes-dependent rule (see CHARTER.md) expects
+// an ERB*Node's prismNode to BE the single embedded-Ruby expression node
+// itself (e.g. isAssignmentNode checks prismNode.constructor.name), not a
+// Program wrapping it. Unwrap here, once, for every ERB node class that
+// defines the prismNode getter, rather than patching the vendored bundle.
+// Only unwraps when the parse yielded exactly one top-level statement —
+// the case single-tag Ruby content always produces — leaving anything
+// else (multiple ';'-separated statements in one tag) as the ProgramNode,
+// same as an unhandled edge case would fall back to.
+Object.keys(HerbLinter).forEach(function (name) {
+  if (!/^ERB.*Node$/.test(name)) return;
+
+  var proto = HerbLinter[name] && HerbLinter[name].prototype;
+  var descriptor = proto && Object.getOwnPropertyDescriptor(proto, "prismNode");
+  if (!descriptor || typeof descriptor.get !== "function") return;
+
+  var originalGet = descriptor.get;
+
+  Object.defineProperty(proto, "prismNode", {
+    configurable: true,
+    enumerable: descriptor.enumerable,
+    get: function () {
+      var raw = originalGet.call(this);
+      var body = raw && raw.constructor && raw.constructor.name === "ProgramNode" && raw.statements && raw.statements.body;
+
+      return body && body.length === 1 ? body[0] : raw;
+    },
+  });
+});
+
 class RubyBackend extends HerbLinter.HerbBackend {
   backendVersion() {
     return "mini_racer";

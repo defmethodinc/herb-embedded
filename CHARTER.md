@@ -74,26 +74,36 @@ already sitting in the `herb` gem's native C extension the whole time.
   every future adapter. Prism-backed rules need real walkable `PrismNode` objects, not JSON,
   so `Prism.dump`'s self-describing versioned binary format crosses as a `Uint8Array` via
   `MiniRacer::Binary` — verified byte-accurate including non-ASCII source.
-  - **`prism_program` rules are wired; `prism_nodes`/`prism_nodes_deep` rules are not (yet).**
-    12 rules in the vendored bundle declare which Prism mode they need via `parserOptions`:
-    `erb-no-debug-output` and `erb-no-instance-variables-in-partials`
-    ask for `prism_program` (one whole-document Prism parse, attached to the root
-    `DocumentNode`); the other 10 (`a11y-no-autofocus-attribute`,
-    `actionview-no-silent-helper`, `actionview-no-unnecessary-tag-attributes`,
-    `erb-no-output-in-attribute-position`, `erb-no-silent-statement`, `erb-no-unsafe-raw`,
-    `erb-no-unsafe-script-interpolation`, `erb-no-unused-expressions`,
-    `erb-no-unused-literals`, `erb-prefer-direct-output`) ask for `prism_nodes` (a separate
-    Prism parse per embedded-Ruby node). `ResultEnvelope.parse` implements the `prism_program`
-    case: it never asks `Herb.parse` itself to embed `prism_node` (that comes back as a raw
-    ASCII-8BIT String and blows up `.to_json`, the bug `FORWARDABLE_OPTIONS` still guards
-    against); instead it separately computes `Prism.dump(Herb.extract_ruby(source)).bytes` — a
-    plain JSON-safe `Integer` array — and injects it onto the root value's `prism_node` key.
-    `Herb.extract_ruby` blanks non-Ruby content but preserves byte length/position, so the
-    resulting Prism byte offsets still line up with `DocumentNode#prismNode`'s use of the
-    original (whole-file) `source`. The `prism_nodes`/`prism_nodes_deep` case — injection onto
-    individual `ERBContentNode`s rather than the document root — needs its own design pass
-    (which nodes carry embedded Ruby, how offsets there compose) and remains unimplemented; see
-    herb-embedded-gu7.
+  - **Both `prism_program` and `prism_nodes`/`prism_nodes_deep` are wired.** 12 rules in the
+    vendored bundle declare which Prism mode they need via `parserOptions`:
+    `erb-no-debug-output` and `erb-no-instance-variables-in-partials` ask for `prism_program`
+    (one whole-document Prism parse, attached to the root `DocumentNode`); the other 10
+    (`a11y-no-autofocus-attribute`, `actionview-no-silent-helper`,
+    `actionview-no-unnecessary-tag-attributes`, `erb-no-output-in-attribute-position`,
+    `erb-no-silent-statement`, `erb-no-unsafe-raw`, `erb-no-unsafe-script-interpolation`,
+    `erb-no-unused-expressions`, `erb-no-unused-literals`, `erb-prefer-direct-output`) ask for
+    `prism_nodes` (a separate Prism parse per embedded-Ruby node — no rule currently requests
+    `prism_nodes_deep`, but `ResultEnvelope` treats it identically). Neither mode ever asks
+    `Herb.parse` itself to embed `prism_node` (that comes back as a raw ASCII-8BIT String and
+    blows up `.to_json`, the bug `FORWARDABLE_OPTIONS` still guards against); both compute a
+    plain JSON-safe `Integer` array of `Prism.dump` bytes separately and inject it into the
+    parsed value hash before serialization.
+    - **`prism_program`** computes `Prism.dump(Herb.extract_ruby(source)).bytes` once and
+      injects it onto the root value's `prism_node` key. `Herb.extract_ruby` blanks non-Ruby
+      content but preserves byte length/position, so the resulting offsets line up with
+      `DocumentNode#prismNode`'s use of the original (whole-file) `source`.
+    - **`prism_nodes`** does the equivalent per node: every `AST_ERB_*` node carries its own
+      embedded-Ruby snippet in a `content` token with a byte range into the whole file: for
+      each one, `ResultEnvelope` blanks every byte *outside* that range (not just non-Ruby
+      content) and re-dumps, so the resulting parse contains just that one node's own
+      statement at its correct absolute offset. Ruby's `Prism.dump` has no API to serialize an
+      arbitrary sub-node directly, so this always yields a `ProgramNode` — but every
+      `prism_nodes`-dependent rule expects `prismNode` to be the single embedded expression
+      node itself (e.g. `isAssignmentNode` checks `prismNode.constructor.name`). `js/ruby_backend.js`
+      patches every `ERB*Node`'s `prismNode` getter, once, to unwrap a single-statement
+      `ProgramNode` down to that inner node — a deliberate, narrowly-scoped patch in *our*
+      integration file, not the vendored bundle, since there's no other way to reach this
+      shape through Ruby's public Prism API.
 - **Exceptions cross the boundary raw, not as structured errors.** An earlier design assumed
   exceptions needed to be caught and translated before crossing. Sixteen probes showed raw
   crossing is catchable, non-poisoning, and preserves the original Ruby class in the outward

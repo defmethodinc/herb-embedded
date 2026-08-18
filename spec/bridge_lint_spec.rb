@@ -108,6 +108,22 @@ RSpec.describe Herb::Embedded::Bridge do
     expect(non_partial_diagnostics).to be_empty
   end
 
+  it "produces a real offense for a prism_nodes-backed rule with offset-sensitive location, not just isEnabled() firing" do
+    source = %(<%= raw(@untrusted) %>\n)
+
+    diagnostics = bridge.lint(source, file: "x.html.erb", rules: ["erb-no-unsafe-raw"])
+
+    expect(diagnostics.size).to eq(1)
+    expect(diagnostics.first.column).to eq(4)
+
+    expect(bridge.lint(%(<%= @untrusted %>\n), file: "x.html.erb", rules: ["erb-no-unsafe-raw"])).to be_empty
+  end
+
+  it "skips assignments for a prism_nodes-backed rule that must inspect the embedded Ruby's node type" do
+    expect(bridge.lint("<% @foo = 1 %>\n", file: "x.html.erb", rules: ["erb-no-silent-statement"])).to be_empty
+    expect(bridge.lint("<% do_something_silently %>\n", file: "x.html.erb", rules: ["erb-no-silent-statement"])).not_to be_empty
+  end
+
   it "excludes a rule not enabled by default when rules: is nil, but includes it when explicitly selected" do
     bridge
 

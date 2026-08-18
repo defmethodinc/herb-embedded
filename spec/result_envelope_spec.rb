@@ -34,10 +34,33 @@ RSpec.describe Herb::Embedded::ResultEnvelope do
         .not_to raise_error
     end
 
-    it "never forwards prism_nodes, even when present in options_hash" do
+    it "never forwards prism_nodes to Herb.parse itself, even when present in options_hash" do
       json = described_class.parse("<%= 1 + 1 %>", prism_nodes: true)
 
       expect { JSON.parse(json) }.not_to raise_error
+    end
+
+    it "injects a JSON-safe prism_node byte array on ERB nodes when prism_nodes is requested" do
+      json = described_class.parse("<%= 1 + 1 %>", prism_nodes: true)
+      erb_node = JSON.parse(json)["value"]["children"].find { |c| c["type"] == "AST_ERB_CONTENT_NODE" }
+
+      expect(erb_node["prism_node"]).to be_an(Array)
+      expect(erb_node["prism_node"]).not_to be_empty
+      expect(erb_node["prism_node"]).to all(be_an(Integer))
+    end
+
+    it "also injects prism_node byte arrays when prism_nodes_deep is requested" do
+      json = described_class.parse("<%= 1 + 1 %>", prism_nodes_deep: true)
+      erb_node = JSON.parse(json)["value"]["children"].find { |c| c["type"] == "AST_ERB_CONTENT_NODE" }
+
+      expect(erb_node["prism_node"]).to be_an(Array)
+    end
+
+    it "leaves prism_node nil on ERB nodes when neither prism_nodes flag is requested" do
+      json = described_class.parse("<%= 1 + 1 %>", {})
+      erb_node = JSON.parse(json)["value"]["children"].find { |c| c["type"] == "AST_ERB_CONTENT_NODE" }
+
+      expect(erb_node["prism_node"]).to be_nil
     end
 
     it "injects a JSON-safe prism_node byte array on the root value when prism_program is requested" do
