@@ -93,7 +93,13 @@ RSpec.describe "Conformance against npx @herb-tools/linter" do
   end
 
   CONFORMANCE_RULE_FIXTURES.each do |fixture_path|
+    # Not the leaky-across-examples pattern this cop targets: `rule` is a
+    # fresh binding per .each iteration, closed over by the one `it` block
+    # defined in that same iteration — the standard way to generate N
+    # examples from a data array, not shared/reassigned mutable state.
+    # rubocop:disable RSpec/LeakyLocalVariable
     rule = conformance_rule_name_for(fixture_path)
+    # rubocop:enable RSpec/LeakyLocalVariable
 
     it "matches npx @herb-tools/linter offense-for-offense on the #{rule} fixture, exercising the rule" do
       reference = reference_offenses(fixture_path, only: rule).sort

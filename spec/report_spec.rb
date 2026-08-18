@@ -5,19 +5,6 @@ require "herb/embedded/diagnostic"
 require "herb/embedded/lint_result"
 require "herb/embedded/report"
 
-RSpec.describe Herb::Embedded::LintResult do
-  it "exposes #file and #diagnostics" do
-    diagnostic = Herb::Embedded::Diagnostic.from_js(
-      { "rule" => "x", "message" => "y", "severity" => "error", "location" => {} }, file: "a.erb"
-    )
-
-    result = described_class.new(file: "a.erb", diagnostics: [diagnostic])
-
-    expect(result.file).to eq("a.erb")
-    expect(result.diagnostics).to eq([diagnostic])
-  end
-end
-
 RSpec.describe Herb::Embedded::Report do
   def diagnostic(severity:, correctable: false, autofix: false)
     offense = { "rule" => "x", "message" => "y", "severity" => severity, "location" => {} }

@@ -74,7 +74,7 @@ RSpec.describe Herb::Embedded::CLI do
 
       _, _, err3 = run_cli(["--only", "nonexistent-rule"], root: root)
       expect(run_cli(["--only", "nonexistent-rule"], root: root).first).to eq(2)
-      expect(err3).to match(/nonexistent-rule/)
+      expect(err3).to include("nonexistent-rule")
     end
 
     Dir.mktmpdir do |root|

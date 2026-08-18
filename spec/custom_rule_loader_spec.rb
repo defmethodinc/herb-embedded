@@ -10,15 +10,6 @@ require "herb/embedded/adapters/mini_racer"
 RSpec.describe Herb::Embedded::CustomRuleLoader do
   let(:adapter) { Herb::Embedded::Adapters::MiniRacer.new }
   let(:bridge) { Herb::Embedded::Bridge.new(adapter: adapter, bundle: Herb::Embedded::Bundle).boot }
-
-  after { adapter.dispose }
-
-  def write_rule(dir, filename, contents)
-    rules_dir = File.join(dir, ".herb", "rules")
-    FileUtils.mkdir_p(rules_dir)
-    File.write(File.join(rules_dir, filename), contents)
-  end
-
   let(:custom_rule_source) do
     <<~JS
       import { ParserRule } from "@herb-tools/linter";
@@ -31,6 +22,14 @@ RSpec.describe Herb::Embedded::CustomRuleLoader do
         }
       }
     JS
+  end
+
+  after { adapter.dispose }
+
+  def write_rule(dir, filename, contents)
+    rules_dir = File.join(dir, ".herb", "rules")
+    FileUtils.mkdir_p(rules_dir)
+    File.write(File.join(rules_dir, filename), contents)
   end
 
   it "loads .herb/rules/**/*.mjs, registers each rule, and returns their names" do
@@ -75,8 +74,8 @@ RSpec.describe Herb::Embedded::CustomRuleLoader do
       end
 
       expect(error).not_to be_nil
-      expect(error.message).to match(/bad\.mjs/)
-      expect(error.message).to match(/"fs"/)
+      expect(error.message).to include("bad.mjs")
+      expect(error.message).to include('"fs"')
     end
   end
 
