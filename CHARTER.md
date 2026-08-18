@@ -74,6 +74,26 @@ already sitting in the `herb` gem's native C extension the whole time.
   every future adapter. Prism-backed rules need real walkable `PrismNode` objects, not JSON,
   so `Prism.dump`'s self-describing versioned binary format crosses as a `Uint8Array` via
   `MiniRacer::Binary` — verified byte-accurate including non-ASCII source.
+  - **`prism_program` rules are wired; `prism_nodes`/`prism_nodes_deep` rules are not (yet).**
+    12 rules in the vendored bundle declare which Prism mode they need via `parserOptions`:
+    `erb-no-debug-output` and `erb-no-instance-variables-in-partials`
+    ask for `prism_program` (one whole-document Prism parse, attached to the root
+    `DocumentNode`); the other 10 (`a11y-no-autofocus-attribute`,
+    `actionview-no-silent-helper`, `actionview-no-unnecessary-tag-attributes`,
+    `erb-no-output-in-attribute-position`, `erb-no-silent-statement`, `erb-no-unsafe-raw`,
+    `erb-no-unsafe-script-interpolation`, `erb-no-unused-expressions`,
+    `erb-no-unused-literals`, `erb-prefer-direct-output`) ask for `prism_nodes` (a separate
+    Prism parse per embedded-Ruby node). `ResultEnvelope.parse` implements the `prism_program`
+    case: it never asks `Herb.parse` itself to embed `prism_node` (that comes back as a raw
+    ASCII-8BIT String and blows up `.to_json`, the bug `FORWARDABLE_OPTIONS` still guards
+    against); instead it separately computes `Prism.dump(Herb.extract_ruby(source)).bytes` — a
+    plain JSON-safe `Integer` array — and injects it onto the root value's `prism_node` key.
+    `Herb.extract_ruby` blanks non-Ruby content but preserves byte length/position, so the
+    resulting Prism byte offsets still line up with `DocumentNode#prismNode`'s use of the
+    original (whole-file) `source`. The `prism_nodes`/`prism_nodes_deep` case — injection onto
+    individual `ERBContentNode`s rather than the document root — needs its own design pass
+    (which nodes carry embedded Ruby, how offsets there compose) and remains unimplemented; see
+    herb-embedded-gu7.
 - **Exceptions cross the boundary raw, not as structured errors.** An earlier design assumed
   exceptions needed to be caught and translated before crossing. Sixteen probes showed raw
   crossing is catchable, non-poisoning, and preserves the original Ruby class in the outward

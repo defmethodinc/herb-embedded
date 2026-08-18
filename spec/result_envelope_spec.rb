@@ -40,6 +40,22 @@ RSpec.describe Herb::Embedded::ResultEnvelope do
       expect { JSON.parse(json) }.not_to raise_error
     end
 
+    it "injects a JSON-safe prism_node byte array on the root value when prism_program is requested" do
+      json = described_class.parse("<div><%= @foo %></div>\n", prism_program: true)
+      envelope = JSON.parse(json)
+
+      expect(envelope["value"]["prism_node"]).to be_an(Array)
+      expect(envelope["value"]["prism_node"]).not_to be_empty
+      expect(envelope["value"]["prism_node"]).to all(be_an(Integer))
+    end
+
+    it "leaves prism_node nil on the root value when prism_program is not requested" do
+      json = described_class.parse("<div><%= @foo %></div>\n", {})
+      envelope = JSON.parse(json)
+
+      expect(envelope["value"]["prism_node"]).to be_nil
+    end
+
     it "forwards track_whitespace and observably changes parse output" do
       source = %(<div  class="a">x</div>)
 

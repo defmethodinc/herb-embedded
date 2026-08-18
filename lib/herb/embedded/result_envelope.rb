@@ -2,6 +2,7 @@
 
 require "herb"
 require "json"
+require "prism"
 
 module Herb
   module Embedded
@@ -11,9 +12,12 @@ module Herb
     module ResultEnvelope
       # Allowlist of Herb::ParserOptions keys safe to forward from
       # caller-supplied options. Deliberately excludes prism_nodes,
-      # prism_nodes_deep, and prism_program: Prism data crosses the
-      # engine boundary as binary (Uint8Array), and forwarding it here
-      # raises JSON::GeneratorError on ASCII-8BIT content. Also excludes
+      # prism_nodes_deep, and prism_program: asking Herb.parse itself to
+      # embed prism_node populates it with a raw ASCII-8BIT String, and
+      # forwarding that through raises JSON::GeneratorError. prism_program
+      # is instead handled below by computing a JSON-safe byte array
+      # ourselves; prism_nodes/prism_nodes_deep (per-ERBContentNode
+      # injection) remain unimplemented — see CHARTER.md. Also excludes
       # timeout and max_errors (timing/error-cap options, not shape).
       FORWARDABLE_OPTIONS = %i[
         strict
@@ -28,10 +32,14 @@ module Herb
       module_function
 
       def parse(source, options_hash = {})
+        options_hash = (options_hash || {}).transform_keys(&:to_sym)
         result = Herb.parse(source, **forwardable(options_hash))
 
+        value_hash = result.value.to_hash
+        value_hash[:prism_node] = prism_program_bytes(source) if options_hash[:prism_program]
+
         {
-          value: result.value,
+          value: value_hash,
           source: result.source,
           warnings: result.warnings,
           errors: result.errors,
@@ -57,6 +65,18 @@ module Herb
         end
       end
       private_class_method :forwardable
+
+      # @herb-tools/core's DocumentNode#prismNode getter deserializes
+      # prism_node bytes against the node's own (whole-file) `source`, so
+      # the bytes must come from parsing something byte-length-identical
+      # to source with Ruby content at the same offsets — exactly what
+      # Herb.extract_ruby produces (non-Ruby content blanked, not
+      # stripped). A plain Array of bytes (not the ASCII-8BIT String
+      # Prism.dump returns) is what keeps this JSON-safe.
+      def prism_program_bytes(source)
+        Prism.dump(Herb.extract_ruby(source)).bytes
+      end
+      private_class_method :prism_program_bytes
     end
   end
 end
