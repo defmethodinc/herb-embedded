@@ -1,0 +1,9 @@
+<% items = [1, 2, 3] %>
+<ul>
+  <% items.each do |item| %>
+    <li><%= item %></li>
+  <% end %>
+</ul>
+<% if items.any? %>
+  <p>Has items</p>
+<% end %>

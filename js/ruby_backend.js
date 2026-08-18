@@ -68,11 +68,21 @@ function __herbRuleNames() {
 // Rule selection happens before execution: Linter's constructor takes an
 // explicit rules array, so an unselected rule is never instantiated or
 // checked, not merely filtered out of the offenses it already produced.
+// With no explicit selection, match upstream's own default: only rules
+// enabled by their own defaultConfig (Linter.filterRulesByConfig with no
+// user config still filters on that), not every available rule class.
+// An explicit selection bypasses that filtering entirely — matching
+// --only's real semantics — so a caller can still opt into a
+// not-enabled-by-default rule by naming it.
 function __herbSelectRules(ruleNames) {
   var wanted = ruleNames && ruleNames.length ? ruleNames : null;
 
+  if (!wanted) {
+    return HerbLinter.Linter.filterRulesByConfig(HerbLinter.rules).enabled;
+  }
+
   return HerbLinter.rules.filter(function (ruleClass) {
-    return !wanted || wanted.indexOf(ruleClass.ruleName) !== -1;
+    return wanted.indexOf(ruleClass.ruleName) !== -1;
   });
 }
 
