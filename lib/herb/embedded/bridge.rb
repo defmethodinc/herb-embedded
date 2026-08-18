@@ -2,6 +2,7 @@
 
 require "json"
 require "prism"
+require_relative "../embedded"
 require_relative "engine_adapter"
 require_relative "result_envelope"
 require_relative "diagnostic"
@@ -12,8 +13,11 @@ module Herb
     # attaches the six Ruby callbacks HerbBackend needs, then loads the
     # RubyBackend subclass and waits for its async init to resolve.
     class Bridge
-      class VersionMismatchError < StandardError; end
-      class NotBootedError < StandardError; end
+      # Rescuing Herb::Embedded::Error catches any of these without also
+      # catching unrelated bugs.
+      class VersionMismatchError < Error; end
+      class NotBootedError < Error; end
+      class BootError < Error; end
 
       HOST_SHIM_PATH = File.expand_path("../../../js/host_shim.js", __dir__)
       RUBY_BACKEND_PATH = File.expand_path("../../../js/ruby_backend.js", __dir__)
@@ -47,7 +51,7 @@ module Herb
         @adapter.load(READY_CHECK_JS)
 
         unless @adapter.call("__herbEmbeddedReady")
-          raise "Bridge failed to boot: #{@adapter.call("__herbEmbeddedError")}"
+          raise BootError, "Bridge failed to boot: #{@adapter.call("__herbEmbeddedError")}"
         end
 
         @booted = true
