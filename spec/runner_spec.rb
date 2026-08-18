@@ -12,6 +12,7 @@ require "herb/embedded/adapters/mini_racer"
 RSpec.describe Herb::Embedded::Runner do
   let(:adapter) { Herb::Embedded::Adapters::MiniRacer.new }
   let(:bridge) { Herb::Embedded::Bridge.new(adapter: adapter, bundle: Herb::Embedded::Bundle).boot }
+  let(:offending_source) { %(<div  class="a">x</div>\n) }
 
   after { adapter.dispose }
 
@@ -21,8 +22,6 @@ RSpec.describe Herb::Embedded::Runner do
     File.write(full_path, contents)
     full_path
   end
-
-  let(:offending_source) { %(<div  class="a">x</div>\n) }
 
   it "discovers files via Config#include_globs (excluding Config#exclude_globs), returns a Report, " \
      "with Diagnostic#file relative to root" do
@@ -77,11 +76,12 @@ RSpec.describe Herb::Embedded::Runner do
       write(root, "clean.html.erb", "<div>hi</div>\n")
       config = Herb::Embedded::Config.new("files" => { "include" => ["**/*.html.erb"] })
       runner = described_class.new(root: root, config: config, bridge: bridge)
-
-      expect(Herb::Embedded::CustomRuleLoader).to receive(:new).once.and_call_original
+      allow(Herb::Embedded::CustomRuleLoader).to receive(:new).and_call_original
 
       runner.run
       runner.run
+
+      expect(Herb::Embedded::CustomRuleLoader).to have_received(:new).once
     end
   end
 end

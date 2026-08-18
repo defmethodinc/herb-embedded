@@ -1,3 +1,7 @@
+plugins:
+  - rubocop-rake
+  - rubocop-rspec
+
 AllCops:
   TargetRubyVersion: 3.2
   NewCops: enable
@@ -64,3 +68,35 @@ Style/TrailingCommaInArrayLiteral:
 
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
+
+# rubocop-rspec cops below: each reflects a deliberate, established choice
+# in how this suite is written (see CLAUDE.md's Test structure), not a
+# blanket suppression of the plugin.
+
+# Specs live flat under spec/ (spec/result_envelope_spec.rb), not nested
+# to mirror lib/'s namespace directories (spec/herb/embedded/...) —
+# consistent across every spec file in the suite.
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
+# This suite favors thorough, narrative examples that exercise a whole
+# scenario (e.g. bridge_autofix_spec.rb's inline fake-rule setup covering
+# both the safe and unsafe autofix paths in one example) over strict
+# one-assertion-per-it atomization. Raised rather than disabled so a
+# genuinely oversized example still gets flagged — 25/8 give headroom
+# above the longest existing examples (22 lines, 7 expectations).
+RSpec/ExampleLength:
+  Max: 25
+
+RSpec/MultipleExpectations:
+  Max: 8
+
+# conformance_spec.rb, no_node_spec.rb, and host_shim_spec.rb describe a
+# scenario or guarantee (offense-for-offense conformance, the no-Node
+# guarantee, a JS shim's behavior), not one Ruby class under test — a
+# string description is the right fit, not a class to invent.
+RSpec/DescribeClass:
+  Exclude:
+    - "spec/conformance/**/*"
+    - "spec/no_node_spec.rb"
+    - "spec/host_shim_spec.rb"

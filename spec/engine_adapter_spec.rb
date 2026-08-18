@@ -27,6 +27,6 @@ RSpec.describe Herb::Embedded::EngineAdapter do
   describe "contract compliance" do
     subject { Herb::Embedded::Adapters::MiniRacer.new }
 
-    include_examples "an engine adapter"
+    it_behaves_like "an engine adapter"
   end
 end

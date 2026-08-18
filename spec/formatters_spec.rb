@@ -40,7 +40,7 @@ RSpec.describe Herb::Embedded::Formatters do
 
       expect(lines).to include("a.html.erb:3:7 error Offense from html-no-space-in-tag (html-no-space-in-tag)")
       expect(lines).to include("b.html.erb:3:7 warning Offense from erb-no-debug-output (erb-no-debug-output)")
-      expect(lines.last).to match(/2 offenses/)
+      expect(lines.last).to include("2 offenses")
     end
   end
 
