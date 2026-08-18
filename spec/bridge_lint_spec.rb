@@ -50,12 +50,9 @@ RSpec.describe Herb::Embedded::Bridge do
     expect(adapter.call("__spyRuleInstantiationCount")).to eq(2)
   end
 
-  # check() depends on result.value.prismNode, which is never populated
-  # under the current architecture (see herb-embedded-gu7) — Task 5's
-  # ResultEnvelope deliberately never forwards prism_program/prism_nodes,
-  # so check() silently returns [] regardless of context. isEnabled() only
-  # reads context.fileName, so it's the only way to prove context
-  # threading for this rule until gu7 wires live Prism injection.
+  # isEnabled() only reads context.fileName, so it's a narrower probe than
+  # check() (see the prism_program-backed diagnostic test below) — kept
+  # separately since it isolates context threading from prismNode wiring.
   it "threads file: into LintContext under both fileName and filename" do
     bridge
 
@@ -97,6 +94,18 @@ RSpec.describe Herb::Embedded::Bridge do
 
     expect(bridge.lint(source, file: "x.html.erb", rules: ["html-no-space-in-tag"])).not_to be_empty
     expect(bridge.lint(%(<div class="a">x</div>), file: "x.html.erb", rules: ["html-no-space-in-tag"])).to be_empty
+  end
+
+  it "produces a real offense for a prism_program-backed rule, not just isEnabled() firing" do
+    source = %(<div><%= @foo %></div>\n)
+
+    diagnostics = bridge.lint(source, file: "app/views/_form.html.erb", rules: ["erb-no-instance-variables-in-partials"])
+
+    expect(diagnostics.size).to eq(1)
+    expect(diagnostics.first.message).to include("@foo")
+
+    non_partial_diagnostics = bridge.lint(source, file: "app/views/form.html.erb", rules: ["erb-no-instance-variables-in-partials"])
+    expect(non_partial_diagnostics).to be_empty
   end
 
   it "excludes a rule not enabled by default when rules: is nil, but includes it when explicitly selected" do
