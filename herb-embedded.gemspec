@@ -9,8 +9,10 @@ Gem::Specification.new do |spec|
   spec.summary = "Embedded Herb linter for Ruby via a pluggable JavaScript engine adapter"
   spec.required_ruby_version = ">= 3.2"
 
-  spec.files = Dir["lib/**/*.rb"] + Dir["vendor/**/*.js"] + Dir["js/**/*.js"]
+  spec.files = Dir["lib/**/*.rb"] + Dir["vendor/**/*.js"] + Dir["js/**/*.js"] + Dir["exe/*"]
   spec.require_paths = ["lib"]
+  spec.bindir = "exe"
+  spec.executables = ["herb-lint-rb"]
 
   spec.metadata = {
     "bug_tracker_uri" => "https://github.com/defmethodinc/herb-embedded/issues",

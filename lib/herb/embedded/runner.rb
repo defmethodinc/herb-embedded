@@ -18,43 +18,46 @@ module Herb
         @custom_rules_loaded = false
       end
 
-      def run(paths = nil)
-        ensure_custom_rules_loaded!
+      def run(paths = nil, rules: nil)
+        load_custom_rules!
 
         Report.new.tap do |report|
           files_for(paths).each do |absolute_path|
             file = relative_path(absolute_path)
-            diagnostics = @bridge.lint(File.read(absolute_path), file: file)
+            diagnostics = @bridge.lint(File.read(absolute_path), file: file, rules: rules)
             report.add(LintResult.new(file: file, diagnostics: diagnostics))
           end
         end
       end
 
-      def fix(paths = nil, unsafe: false)
-        ensure_custom_rules_loaded!
+      def fix(paths = nil, rules: nil, unsafe: false)
+        load_custom_rules!
 
         Report.new.tap do |report|
           files_for(paths).each do |absolute_path|
             file = relative_path(absolute_path)
             original_source = File.read(absolute_path)
-            result = @bridge.autofix(original_source, file: file, unsafe: unsafe)
+            result = @bridge.autofix(original_source, file: file, rules: rules, unsafe: unsafe)
 
             File.write(absolute_path, result[:source]) if result[:source] != original_source
 
-            diagnostics = @bridge.lint(result[:source], file: file)
+            diagnostics = @bridge.lint(result[:source], file: file, rules: rules)
             report.add(LintResult.new(file: file, diagnostics: diagnostics))
           end
         end
       end
 
-      private
-
-      def ensure_custom_rules_loaded!
+      # Idempotent and safe to call ahead of #run/#fix — e.g. so a caller
+      # can validate rule names (like a CLI's --only flag) against
+      # Bridge#rule_names with custom rules already registered.
+      def load_custom_rules!
         return if @custom_rules_loaded
 
         CustomRuleLoader.new(root: @root, bridge: @bridge).load_all
         @custom_rules_loaded = true
       end
+
+      private
 
       def files_for(paths)
         return discover_files unless paths
