@@ -161,7 +161,7 @@ function __herbRegisterCustomRule(rewrittenSource, path) {
 function __herbAutofix(source, file, ruleNames, includeUnsafe) {
   var ruleClasses = __herbSelectRules(ruleNames);
   var context = { fileName: file, filename: file };
-  var linter = new HerbLinter.Linter(__herbEmbeddedBridge.instance, ruleClasses);
+  var linter = new HerbLinter.Linter(__herbEmbeddedBridge.instance, ruleClasses, undefined, HerbLinter.rules);
   var result = linter.autofix(source, context, undefined, { includeUnsafe: !!includeUnsafe });
 
   return JSON.stringify({ source: result.source, fixed: result.fixed });
@@ -171,6 +171,15 @@ function __herbAutofix(source, file, ruleNames, includeUnsafe) {
 // throws must not abort the run (spike 2 finding) — the real Linter#lint
 // has no such isolation internally, since it runs every selected rule's
 // check() in one uncaught loop.
+//
+// The 4th constructor arg (allAvailableRules) must be the full registry,
+// not just the one rule being run: herb-disable-comment-unnecessary reads
+// context.validRuleNames (built from Linter#getAvailableRules, which
+// falls back to allAvailableRules) to decide whether a `herb:disable
+// some-other-rule` comment references a real rule — omitting this arg
+// left validRuleNames scoped to whatever single rule __herbLint happened
+// to be running, so the rule silently never matched anything outside
+// itself. Caught by conformance fixture coverage (herb-embedded-ag7).
 function __herbLint(source, file, ruleNames) {
   var ruleClasses = __herbSelectRules(ruleNames);
   var context = { fileName: file, filename: file };
@@ -178,7 +187,7 @@ function __herbLint(source, file, ruleNames) {
 
   ruleClasses.forEach(function (ruleClass) {
     try {
-      var linter = new HerbLinter.Linter(__herbEmbeddedBridge.instance, [ruleClass]);
+      var linter = new HerbLinter.Linter(__herbEmbeddedBridge.instance, [ruleClass], undefined, HerbLinter.rules);
       var result = linter.lint(source, context);
       offenses = offenses.concat(result.offenses);
     } catch (e) {
