@@ -9,7 +9,18 @@ Gem::Specification.new do |spec|
   spec.summary = "Embedded Herb linter for Ruby via a pluggable JavaScript engine adapter"
   spec.required_ruby_version = ">= 3.2"
 
-  spec.files = Dir["lib/**/*.rb"] + Dir["vendor/**/*.js"] + Dir["js/**/*.js"] + Dir["exe/*"]
+  # An explicit git-tracked allowlist, not Dir[] globs: a pushed gem is
+  # public and widely mirrored, so a stray file that happens to match a
+  # broad glob (a local debug script, an untracked scratch file) would
+  # ship with no review catching it before `gem push` — and a published
+  # version can only be yanked, not recalled from whoever already has it.
+  # See guides.rubygems.org/security.
+  spec.files = `git ls-files -z`.split("\x0").select do |file|
+    file.match?(%r{\Alib/.*\.rb\z}) ||
+      file.match?(%r{\Avendor/.*\.js\z}) ||
+      file.match?(%r{\Ajs/.*\.js\z}) ||
+      file.match?(%r{\Aexe/[^/]+\z})
+  end
   spec.require_paths = ["lib"]
   spec.bindir = "exe"
   spec.executables = ["herb-lint-rb"]
