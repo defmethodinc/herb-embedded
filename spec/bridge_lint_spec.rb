@@ -98,4 +98,27 @@ RSpec.describe Herb::Embedded::Bridge do
     expect(bridge.lint(source, file: "x.html.erb", rules: ["html-no-space-in-tag"])).not_to be_empty
     expect(bridge.lint(%(<div class="a">x</div>), file: "x.html.erb", rules: ["html-no-space-in-tag"])).to be_empty
   end
+
+  it "excludes a rule not enabled by default when rules: is nil, but includes it when explicitly selected" do
+    bridge
+
+    adapter.load(<<~JS)
+      class FakeDisabledByDefaultRule extends HerbLinter.SourceRule {
+        static ruleName = "fake-disabled-by-default";
+        get defaultConfig() { return { enabled: false, severity: "error", exclude: [] }; }
+        check(source, context) {
+          return [this.createOffense("should not run by default", { start: { line: 1, column: 0 }, end: { line: 1, column: 1 } })];
+        }
+      }
+      HerbLinter.rules.push(FakeDisabledByDefaultRule);
+    JS
+
+    source = "<div>hi</div>\n"
+
+    default_diagnostics = bridge.lint(source, file: "x.html.erb")
+    expect(default_diagnostics.map(&:rule)).not_to include("fake-disabled-by-default")
+
+    explicit_diagnostics = bridge.lint(source, file: "x.html.erb", rules: ["fake-disabled-by-default"])
+    expect(explicit_diagnostics.map(&:rule)).to include("fake-disabled-by-default")
+  end
 end

@@ -51,9 +51,13 @@ RSpec.describe Herb::Embedded::CLI do
 
     Dir.mktmpdir do |root|
       write(root, "warning_only.html.erb", %(<nav><a href="/">Home</a></nav>\n))
+      # html-navigation-has-label isn't enabled by default upstream, so
+      # --only is needed to exercise it deliberately (matching real
+      # --only semantics: it bypasses default-enabled filtering).
+      only_flags = ["--only", "html-navigation-has-label"]
 
-      expect(run_cli([], root: root).first).to eq(0)
-      expect(run_cli(["--fail-level", "warning"], root: root).first).to eq(1)
+      expect(run_cli(only_flags, root: root).first).to eq(0)
+      expect(run_cli(only_flags + ["--fail-level", "warning"], root: root).first).to eq(1)
     end
   end
 
