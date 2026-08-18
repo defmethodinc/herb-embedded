@@ -1,6 +1,6 @@
 # herb-embedded
 
-Lints ERB templates with [Herb](https://herb-tools.dev)'s actual rule set — 106 built-in
+Lints ERB templates with [Herb](https://herb-tools.dev)'s actual rule set — 100 built-in
 rules spanning accessibility, Action View, ERB, HTML, SVG, and Turbo markup, plus autofix —
 as a plain Ruby dependency. Nothing shells out to Node while it runs.
 
