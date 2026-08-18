@@ -24,9 +24,14 @@ RSpec.describe "Conformance against npx @herb-tools/linter" do
   after { adapter.dispose }
 
   def reference_offenses(fixture_path)
+    # --no-github: herb-lint auto-enables GitHub Actions annotations whenever
+    # GITHUB_ACTIONS=true is set (i.e. inside our own CI job), which then
+    # conflicts fatally with --json ("--github cannot be used with --json
+    # format"). Explicitly disabling it makes --json behavior independent of
+    # the invoking environment.
     stdout, stderr, status = Open3.capture3(
-      CONFORMANCE_REFERENCE_LINTER, fixture_path, "--json", "--no-custom-rules", "--no-color", "--jobs", "1",
-      chdir: CONFORMANCE_ROOT
+      CONFORMANCE_REFERENCE_LINTER, fixture_path, "--json", "--no-custom-rules", "--no-color", "--no-github",
+      "--jobs", "1", chdir: CONFORMANCE_ROOT
     )
     unless status.exitstatus.zero? || status.exitstatus == 1
       raise "reference herb-lint failed (exit #{status.exitstatus}): #{stderr}"
