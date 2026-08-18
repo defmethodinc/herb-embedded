@@ -9,6 +9,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with: { bundler-cache: true }
+      # update: refresh the local ruby-advisory-db clone first so check
+      # never runs against a stale snapshot cached from a prior run.
+      - run: bundle exec rake bundle:audit:update bundle:audit:check
       # Node present ONLY to build the bundle and run conformance reference
       - uses: actions/setup-node@v4
         with: { node-version: "22" }

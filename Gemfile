@@ -7,6 +7,7 @@ ruby file: ".ruby-version"
 gemspec
 
 group :development do
+  gem "bundler-audit", require: false
   gem "rake", "13.4.2"
   gem "rspec", "3.13.2"
   gem "rubocop", require: false
