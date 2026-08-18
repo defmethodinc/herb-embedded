@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "herb/embedded"
+require "herb/embedded/cli"
+
+exit(Herb::Embedded::CLI.new(ARGV, stdout: $stdout, stderr: $stderr).run)
