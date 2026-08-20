@@ -33,4 +33,10 @@ Set it back with `bd update <THE BEAD> --status blocked` and a note saying
 what remains contested. Summarize it for me — that usually means the
 acceptance criteria were ambiguous, which is my problem to fix, not yours.
 
+**Then write down what failed.** Append to ~/diaspar/artifacts/criteria/ a
+short entry naming the criterion that could not be settled, why it was
+ambiguous, and the wording that would have been unambiguous. This is the only
+moment that knowledge exists — do not skip it because the session is ending.
+
+
 Never run `bd close`. The bead closes after merge, not after the PR opens.
