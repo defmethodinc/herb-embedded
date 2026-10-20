@@ -10,7 +10,7 @@ require_relative "diagnostic"
 module Herb
   module Embedded
     # Boots the JS engine: loads the host shim and vendored bundle,
-    # attaches the six Ruby callbacks HerbBackend needs, then loads the
+    # attaches the seven Ruby callbacks HerbBackend needs, then loads the
     # RubyBackend subclass and waits for its async init to resolve.
     class Bridge
       # Rescuing Herb::Embedded::Error catches any of these without also
@@ -68,9 +68,18 @@ module Herb
         @adapter.call("__herbRuleNames")
       end
 
-      def lint(source, file:, rules: nil)
+      # Rule name => list of frameworks the rule is scoped to (nil when
+      # it applies everywhere). Used by conformance to lint each rule the
+      # way upstream looks at it, and by callers that need to know
+      # whether a rule only answers under `framework: actionview`.
+      def rule_frameworks
         ensure_booted!
-        offenses = JSON.parse(@adapter.call("__herbLint", source, file, rules))
+        @adapter.call("__herbRuleFrameworks").to_h { |entry| [entry["name"], entry["frameworks"]] }
+      end
+
+      def lint(source, file:, rules: nil, framework: nil)
+        ensure_booted!
+        offenses = JSON.parse(@adapter.call("__herbLint", source, file, rules, framework))
         offenses.map { |offense| Diagnostic.from_js(offense, file: file) }
       end
 
@@ -83,9 +92,9 @@ module Herb
       # parse into a user's working tree. If the fixed output fails to
       # parse while the original input parsed cleanly, the fix is
       # discarded rather than trusted.
-      def autofix(source, file:, rules: nil, unsafe: false)
+      def autofix(source, file:, rules: nil, unsafe: false, framework: nil)
         ensure_booted!
-        raw = JSON.parse(@adapter.call("__herbAutofix", source, file, rules, unsafe))
+        raw = JSON.parse(@adapter.call("__herbAutofix", source, file, rules, unsafe, framework))
 
         if source_parses?(source) && !source_parses?(raw["source"])
           return { source: source, applied: [], discarded: true }
@@ -106,10 +115,19 @@ module Herb
       end
 
       def attach_callbacks
+        attach_parse_callbacks
+        attach_ruby_callbacks
+      end
+
+      def attach_parse_callbacks
         @adapter.attach("rbParse") { |source, options| ResultEnvelope.parse(source, options || {}) }
         @adapter.attach("rbLex") { |source| ResultEnvelope.lex(source) }
         @adapter.attach("rbExtractRuby") { |source, options| ::Herb.extract_ruby(source, **symbolize(options)) }
         @adapter.attach("rbExtractHTML") { |source| ::Herb.extract_html(source) }
+      end
+
+      def attach_ruby_callbacks
+        @adapter.attach("rbDefaultERBOpenings") { ::Herb.default_erb_openings }
         @adapter.attach("rbParseRuby") { |source| EngineAdapter.binary(::Prism.dump(source)) }
         @adapter.attach("rbVersion") { ::Herb.version }
       end

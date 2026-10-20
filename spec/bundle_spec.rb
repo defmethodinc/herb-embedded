@@ -34,14 +34,14 @@ RSpec.describe Herb::Embedded::Bundle do
   end
 
   describe ".linter_version" do
-    it 'is "0.10.3"' do
-      expect(described_class.linter_version).to eq("0.10.3")
+    it 'is "0.11.1"' do
+      expect(described_class.linter_version).to eq("0.11.1")
     end
   end
 
   describe ".herb_versions" do
-    it 'is ["0.10.3"]' do
-      expect(described_class.herb_versions).to eq(["0.10.3"])
+    it 'is ["0.11.1"]' do
+      expect(described_class.herb_versions).to eq(["0.11.1"])
     end
   end
 end

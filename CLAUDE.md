@@ -124,11 +124,12 @@ Two shapes cross the Ruby/JS boundary, for two different reasons:
   self-describing versioned binary format, wrapped as `MiniRacer::Binary` so
   the adapter marshals it as a `Uint8Array`.
 
-`Bridge` currently attaches **six** callbacks — `rbParse`, `rbLex`,
-`rbExtractRuby`, `rbExtractHTML`, `rbParseRuby`, `rbVersion` — one per
-`HerbBackend` method the bundle calls, not just the two (`parse`/`parseRuby`)
-that matter for rule execution. The other three exist because `HerbBackend`'s
-interface requires them, not because more rules depend on them.
+`Bridge` currently attaches **seven** callbacks — `rbParse`, `rbLex`,
+`rbExtractRuby`, `rbExtractHTML`, `rbDefaultERBOpenings`, `rbParseRuby`,
+`rbVersion` — one per `HerbBackend` method the bundle calls, not just the two
+(`parse`/`parseRuby`) that matter for rule execution. The other five exist
+because `HerbBackend`'s interface requires them, not because more rules depend
+on them.
 
 ### Extension points
 

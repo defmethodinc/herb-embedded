@@ -1,5 +1,5 @@
 // Wires the vendored @herb-tools/linter bundle to Ruby. Must load after
-// vendor/herb-linter.js and after the six rbXxx callbacks below are
+// vendor/herb-linter.js and after the seven rbXxx callbacks below are
 // attached (Bridge#boot handles the ordering).
 //
 // HerbBackend (from @herb-tools/core) must be subclassed: its `version`
@@ -17,6 +17,9 @@ var libHerbBackend = {
   },
   extractHTML: function (source) {
     return rbExtractHTML(source);
+  },
+  defaultERBOpenings: function () {
+    return rbDefaultERBOpenings();
   },
   parseRuby: function (source) {
     return rbParseRuby(source);
@@ -98,6 +101,22 @@ function __herbRuleNames() {
   });
 }
 
+// Rule metadata the Ruby side needs to reproduce upstream's framework
+// scoping (e.g. so the conformance harness can lint an Action View rule
+// under `framework: actionview`, the only framework it answers in).
+function __herbRuleFrameworks() {
+  return HerbLinter.rules.map(function (ruleClass) {
+    var config;
+    try {
+      config = new ruleClass().defaultConfig;
+    } catch (e) {
+      config = null;
+    }
+
+    return { name: ruleClass.ruleName, frameworks: (config && config.frameworks) || null };
+  });
+}
+
 // Rule selection happens before execution: Linter's constructor takes an
 // explicit rules array, so an unselected rule is never instantiated or
 // checked, not merely filtered out of the offenses it already produced.
@@ -117,6 +136,19 @@ function __herbSelectRules(ruleNames) {
   return HerbLinter.rules.filter(function (ruleClass) {
     return wanted.indexOf(ruleClass.ruleName) !== -1;
   });
+}
+
+// Mirrors Linter.from({ only }): naming rules explicitly must bypass the
+// framework/environment/path filters that apply to a normal default run.
+// Without this, `--only actionview-no-silent-render` stays silent because
+// the context has no framework (so it defaults to "ruby") even though the
+// caller asked for that rule by name.
+function __herbApplyExplicitSelection(linter, ruleNames) {
+  if (ruleNames && ruleNames.length) {
+    linter.onlyRules = Array.from(new Set(ruleNames));
+  }
+
+  return linter;
 }
 
 // Registers a custom rule from Ruby-rewritten source (see
@@ -158,10 +190,11 @@ function __herbRegisterCustomRule(rewrittenSource, path) {
 // it walks offenses from every selected rule together, unlike #lint's
 // per-rule crash isolation). The parse-doesn't-break safety check lives
 // on the Ruby side (Bridge#autofix), since it just needs Herb.parse.
-function __herbAutofix(source, file, ruleNames, includeUnsafe) {
+function __herbAutofix(source, file, ruleNames, includeUnsafe, framework) {
   var ruleClasses = __herbSelectRules(ruleNames);
-  var context = { fileName: file, filename: file };
+  var context = { fileName: file, filename: file, framework: framework || undefined };
   var linter = new HerbLinter.Linter(__herbEmbeddedBridge.instance, ruleClasses, undefined, HerbLinter.rules);
+  __herbApplyExplicitSelection(linter, ruleNames);
   var result = linter.autofix(source, context, undefined, { includeUnsafe: !!includeUnsafe });
 
   return JSON.stringify({ source: result.source, fixed: result.fixed });
@@ -180,14 +213,15 @@ function __herbAutofix(source, file, ruleNames, includeUnsafe) {
 // left validRuleNames scoped to whatever single rule __herbLint happened
 // to be running, so the rule silently never matched anything outside
 // itself. Caught by conformance fixture coverage (herb-embedded-ag7).
-function __herbLint(source, file, ruleNames) {
+function __herbLint(source, file, ruleNames, framework) {
   var ruleClasses = __herbSelectRules(ruleNames);
-  var context = { fileName: file, filename: file };
+  var context = { fileName: file, filename: file, framework: framework || undefined };
   var offenses = [];
 
   ruleClasses.forEach(function (ruleClass) {
     try {
       var linter = new HerbLinter.Linter(__herbEmbeddedBridge.instance, [ruleClass], undefined, HerbLinter.rules);
+      __herbApplyExplicitSelection(linter, ruleNames);
       var result = linter.lint(source, context);
       offenses = offenses.concat(result.offenses);
     } catch (e) {

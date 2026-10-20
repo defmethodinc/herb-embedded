@@ -1,0 +1,7 @@
+<ul data-herb-name="messages">
+  <% @messages.each do |message| %>
+    <%# herb:key %>
+    <li><%= message.body %></li>
+  <% end %>
+</ul>
+<form data-herb-into="messages"><input name="body"></form>

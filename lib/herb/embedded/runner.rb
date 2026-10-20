@@ -24,7 +24,7 @@ module Herb
         Report.new.tap do |report|
           files_for(paths).each do |absolute_path|
             file = relative_path(absolute_path)
-            diagnostics = @bridge.lint(File.read(absolute_path), file: file, rules: rules)
+            diagnostics = @bridge.lint(File.read(absolute_path), file: file, rules: rules, framework: @config.framework)
             report.add(LintResult.new(file: file, diagnostics: diagnostics))
           end
         end
@@ -35,14 +35,7 @@ module Herb
 
         Report.new.tap do |report|
           files_for(paths).each do |absolute_path|
-            file = relative_path(absolute_path)
-            original_source = File.read(absolute_path)
-            result = @bridge.autofix(original_source, file: file, rules: rules, unsafe: unsafe)
-
-            File.write(absolute_path, result[:source]) if result[:source] != original_source
-
-            diagnostics = @bridge.lint(result[:source], file: file, rules: rules)
-            report.add(LintResult.new(file: file, diagnostics: diagnostics))
+            fix_file(absolute_path, report, rules: rules, unsafe: unsafe)
           end
         end
       end
@@ -58,6 +51,23 @@ module Herb
       end
 
       private
+
+      def fix_file(absolute_path, report, rules:, unsafe:)
+        file = relative_path(absolute_path)
+        original_source = File.read(absolute_path)
+        result = @bridge.autofix(
+          original_source,
+          file: file,
+          rules: rules,
+          unsafe: unsafe,
+          framework: @config.framework,
+        )
+
+        File.write(absolute_path, result[:source]) if result[:source] != original_source
+
+        diagnostics = @bridge.lint(result[:source], file: file, rules: rules, framework: @config.framework)
+        report.add(LintResult.new(file: file, diagnostics: diagnostics))
+      end
 
       def files_for(paths)
         return discover_files unless paths

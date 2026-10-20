@@ -4,8 +4,8 @@ module Herb
   module Embedded
     # The vendored @herb-tools/linter JS bundle (see rakelib/bundle.rake).
     module Bundle
-      LINTER_VERSION = "0.10.3"
-      HERB_VERSIONS = ["0.10.3"].freeze
+      LINTER_VERSION = "0.11.1"
+      HERB_VERSIONS = ["0.11.1"].freeze
 
       VENDOR_PATH = File.expand_path("../../../vendor/herb-linter.js", __dir__)
 
