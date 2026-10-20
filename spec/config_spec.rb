@@ -25,7 +25,7 @@ RSpec.describe Herb::Embedded::Config do
     end
 
     it "returns documented defaults for keys omitted from a present .herb.yml" do
-      with_herb_yml("version: \"0.10.3\"\n") do |dir|
+      with_herb_yml("version: \"0.11.1\"\n") do |dir|
         config = described_class.load(dir)
 
         expect(config.include_globs).to eq(["**/*.html.erb", "**/*.herb"])
@@ -64,8 +64,22 @@ RSpec.describe Herb::Embedded::Config do
 
   describe "#linter_version" do
     it "reads the top-level version key" do
-      with_herb_yml("version: \"0.10.3\"\n") do |dir|
-        expect(described_class.load(dir).linter_version).to eq("0.10.3")
+      with_herb_yml("version: \"0.11.1\"\n") do |dir|
+        expect(described_class.load(dir).linter_version).to eq("0.11.1")
+      end
+    end
+  end
+
+  describe "#framework" do
+    it "reads the top-level framework key" do
+      with_herb_yml("framework: actionview\n") do |dir|
+        expect(described_class.load(dir).framework).to eq("actionview")
+      end
+    end
+
+    it "is nil when omitted, leaving upstream's ruby default in place" do
+      with_herb_yml(nil) do |dir|
+        expect(described_class.load(dir).framework).to be_nil
       end
     end
   end

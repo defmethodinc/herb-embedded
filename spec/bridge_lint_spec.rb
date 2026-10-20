@@ -25,6 +25,26 @@ RSpec.describe Herb::Embedded::Bridge do
     expect(bridge.rule_names.size).to be > 50
   end
 
+  it "reports which frameworks a rule is scoped to" do
+    expect(bridge.rule_frameworks["erb-no-javascript-tag-helper"]).to eq(["actionview"])
+    expect(bridge.rule_frameworks["html-no-space-in-tag"]).to be_nil
+  end
+
+  it "threads framework: into the lint context, enabling Action View helper parsing" do
+    source = <<~ERB
+      <%= javascript_tag do %>
+        console.log("hi");
+      <% end %>
+    ERB
+
+    default_run = bridge.lint(source, file: "x.html.erb", rules: ["erb-no-javascript-tag-helper"])
+    actionview_run = bridge.lint(source, file: "x.html.erb", rules: ["erb-no-javascript-tag-helper"],
+                                         framework: "actionview")
+
+    expect(default_run).to be_empty
+    expect(actionview_run.map(&:rule)).to eq(["erb-no-javascript-tag-helper"])
+  end
+
   it "restricts execution to exactly the selected rules, confirmed by a side-channel instantiation count" do
     bridge
 

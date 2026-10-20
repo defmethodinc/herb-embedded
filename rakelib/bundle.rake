@@ -17,7 +17,16 @@ namespace :bundle do
          "--format=iife",
          "--global-name=HerbLinter",
          "--platform=neutral",
-         "--alias:@herb-tools/config=./stubs/config.mjs",
+         "--main-fields=module,main",
+         # postcss (pulled in by the scoped-style and CSS rules in linter
+         # 0.11) reaches for Node built-ins it only needs for source maps
+         # and terminal colors. Alias those to our no-filesystem stubs;
+         # parsing in-memory CSS never takes those paths.
+         "--alias:path=./stubs/path.mjs",
+         "--alias:fs=./stubs/fs.mjs",
+         "--alias:url=./stubs/url.mjs",
+         "--alias:util=./stubs/util.mjs",
+         "--alias:picocolors=./stubs/picocolors.mjs",
          "--outfile=#{tmp_outfile}"
 
       node_builtin_reference = %r{

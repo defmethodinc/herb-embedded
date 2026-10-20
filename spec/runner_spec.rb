@@ -39,7 +39,7 @@ RSpec.describe Herb::Embedded::Runner do
 
       expect(report.files_checked).to eq(1)
       expect(report.diagnostics).not_to be_empty
-      expect(report.diagnostics.map(&:file)).to eq(["good.html.erb"])
+      expect(report.diagnostics.map(&:file)).to all(eq("good.html.erb"))
     end
   end
 
@@ -53,7 +53,7 @@ RSpec.describe Herb::Embedded::Runner do
       report = runner.run([path])
 
       expect(report.files_checked).to eq(1)
-      expect(report.diagnostics.map(&:file)).to eq(["explicit.html.erb"])
+      expect(report.diagnostics.map(&:file)).to all(eq("explicit.html.erb"))
     end
   end
 
@@ -68,6 +68,28 @@ RSpec.describe Herb::Embedded::Runner do
 
       expect(File.read(path)).to eq("<div>hi</div>\n")
       expect(report.diagnostics.map(&:rule)).not_to include("erb-no-trailing-whitespace")
+    end
+  end
+
+  it "passes the configured framework through to the engine" do
+    Dir.mktmpdir do |root|
+      write(root, "script.html.erb", <<~ERB)
+        <%= javascript_tag do %>
+          console.log("hi");
+        <% end %>
+      ERB
+
+      ruby_config = Herb::Embedded::Config.new("files" => { "include" => ["**/*.html.erb"] })
+      actionview_config = Herb::Embedded::Config.new(
+        "framework" => "actionview",
+        "files" => { "include" => ["**/*.html.erb"] },
+      )
+
+      ruby_report = described_class.new(root: root, config: ruby_config, bridge: bridge).run
+      actionview_report = described_class.new(root: root, config: actionview_config, bridge: bridge).run
+
+      expect(ruby_report.diagnostics.map(&:rule)).not_to include("erb-no-javascript-tag-helper")
+      expect(actionview_report.diagnostics.map(&:rule)).to include("erb-no-javascript-tag-helper")
     end
   end
 

@@ -26,6 +26,9 @@ module Herb
         transform_conditionals
         render_nodes
         strict_locals
+        herb_directives
+        iteration_nodes
+        erb_openers
       ].freeze
 
       module_function

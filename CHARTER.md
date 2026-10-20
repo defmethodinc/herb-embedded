@@ -2,7 +2,7 @@
 
 ## What this is
 
-herb-embedded runs [Herb](https://herb-tools.dev)'s real HTML+ERB lint rules — all 107 of
+herb-embedded runs [Herb](https://herb-tools.dev)'s real HTML+ERB lint rules — all 170 of
 them, spanning accessibility, Action View, ERB, HTML, SVG, Turbo, and UJS, plus autofix —
 in a pure Ruby process, with no Node.js required at runtime. It does this by vendoring
 Herb's rule engine as JavaScript and executing it in-process through a pluggable embedded
@@ -48,7 +48,7 @@ already sitting in the `herb` gem's native C extension the whole time.
 
 ## Out of scope
 
-- **Porting rules to Ruby.** The 107 rules are imperative TypeScript, not data. Porting them
+- **Porting rules to Ruby.** The 170 rules are imperative TypeScript, not data. Porting them
   forks the rule set the day it ships and it diverges from there.
 - **`herb format`.** The formatter is a separate package with its own semantics, and
   formatter bugs are more visible than linter bugs because they rewrite whole files.
@@ -116,7 +116,7 @@ already sitting in the `herb` gem's native C extension the whole time.
   gates nothing under 0.x semver. `Bundle` records the exact `herb` gem versions it was
   validated against; `Bridge` checks at boot against that set.
 - **Gem version mirrors the vendored linter version, plus a gem-side segment:**
-  `herb-embedded 0.10.3.N` vendors `@herb-tools/linter@0.10.3`. `Gemfile.lock` then answers
+  `herb-embedded 0.11.1.N` vendors `@herb-tools/linter@0.11.1`. `Gemfile.lock` then answers
   "which rules do I have" unambiguously.
 - **Namespace `Herb::Embedded`; executable `herb-lint-rb`.** The `-rb` suffix lets it coexist
   with the npm `herb-lint` binary rather than shadowing it.
@@ -164,7 +164,7 @@ already sitting in the `herb` gem's native C extension the whole time.
    `prism_program`/`prism_nodes`, see the Shape decisions entry above) are resolved; each had
    a named cause tracked as implementation work in `bd` (`herb-embedded-6dp` and related
    beads), not a design gap. `spec/conformance/conformance_spec.rb` now runs the differential
-   offense-for-offense diff against a hand-written fixture for every one of the 100 rules the
+   offense-for-offense diff against a hand-written fixture for every one of the 170 rules the
    vendored bundle registers (`herb-embedded-ag7`), gated so an upstream rule with no fixture
    fails the build — not just the 5 general-purpose fixtures from before. `.herb.yml` config
    application is unaffected by that work and still worth a look if it's ever suspected of

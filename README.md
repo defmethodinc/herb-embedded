@@ -1,6 +1,6 @@
 # herb-embedded
 
-Lints ERB templates with [Herb](https://herb-tools.dev)'s actual rule set — 100 built-in
+Lints ERB templates with [Herb](https://herb-tools.dev)'s actual rule set — 170 built-in
 rules spanning accessibility, Action View, ERB, HTML, SVG, and Turbo markup, plus autofix —
 as a plain Ruby dependency. Nothing shells out to Node while it runs.
 
@@ -77,7 +77,7 @@ Exit codes: `0` clean, `1` offenses found at or above the fail level, `2` a conf
 `bundle exec herb-lint-rb --init` writes a starter file:
 
 ```yaml
-version: "0.10.3"
+version: "0.11.1"
 files:
   include:
     - "**/*.html.erb"
@@ -92,6 +92,9 @@ linter:
   informational, not enforced.
 - `files.include` / `files.exclude` are glob lists (relative to the directory `herb-lint-rb`
   runs from) that control which files a no-argument run discovers.
+- `framework` tells the engine which framework's helpers and conventions to assume
+  (`ruby`, `actionview`, `hanami`, or `sinatra`). It defaults to `ruby` when absent;
+  Action View-specific rules only run when it is set to `actionview`.
 - `linter.fail_level` sets the default minimum severity that produces a non-zero exit code
   (overridable per-run with `--fail-level`).
 - `linter.rules.<rule-name>.enabled: false` disables a built-in rule:
@@ -103,8 +106,9 @@ linter:
         enabled: false
   ```
 
-Only these keys are read; any other key from upstream `@herb-tools/config`'s schema is parsed
-but ignored, not an error.
+Only these keys (`version`, `framework`, `files.include`, `files.exclude`,
+`linter.fail_level`, and `linter.rules`) are read; any other key from upstream
+`@herb-tools/config`'s schema is parsed but ignored, not an error.
 
 ## Custom rules
 

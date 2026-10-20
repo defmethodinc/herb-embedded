@@ -2,6 +2,6 @@
 
 module Herb
   module Embedded
-    VERSION = "0.10.3.0"
+    VERSION = "0.11.1.0"
   end
 end

@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    herb-embedded (0.10.3.0)
-      herb (~> 0.10.3)
+    herb-embedded (0.11.1.0)
+      herb (~> 0.11.1)
       mini_racer (~> 0.22)
 
 GEM
@@ -13,13 +13,13 @@ GEM
       bundler (>= 1.2.0)
       thor (~> 1.0)
     diff-lcs (1.6.2)
-    herb (0.10.3)
-    herb (0.10.3-aarch64-linux-gnu)
-    herb (0.10.3-aarch64-linux-musl)
-    herb (0.10.3-arm64-darwin)
-    herb (0.10.3-x86_64-darwin)
-    herb (0.10.3-x86_64-linux-gnu)
-    herb (0.10.3-x86_64-linux-musl)
+    herb (0.11.1)
+    herb (0.11.1-aarch64-linux-gnu)
+    herb (0.11.1-aarch64-linux-musl)
+    herb (0.11.1-arm64-darwin)
+    herb (0.11.1-x86_64-darwin)
+    herb (0.11.1-x86_64-linux-gnu)
+    herb (0.11.1-x86_64-linux-musl)
     json (2.21.2)
     language_server-protocol (3.17.0.6)
     libv8-node (24.12.0.1)
@@ -104,14 +104,14 @@ CHECKSUMS
   bundler (4.0.16) sha256=d6ca5dd440c24f9abce9844cf44cc8e18c6a553de65a47efb4544137af92c47d
   bundler-audit (0.9.3) sha256=81c8766c71e47d0d28a0f98c7eed028539f21a6ea3cd8f685eb6f42333c9b4e9
   diff-lcs (1.6.2) sha256=9ae0d2cba7d4df3075fe8cd8602a8604993efc0dfa934cff568969efb1909962
-  herb (0.10.3) sha256=da76e8bfbb302586ee51a4fb608624f48218fbfea198a9493540b42f7654024b
-  herb (0.10.3-aarch64-linux-gnu) sha256=1eaea87e6577557492a1b0ddaae989fba8a8ddd382e888ee5f939ce6ded06eb8
-  herb (0.10.3-aarch64-linux-musl) sha256=4ac7ccd194f8f284ffc7bf093676f5194cf0f44ea4a7d3888eac095e81c43e1f
-  herb (0.10.3-arm64-darwin) sha256=1a5bef57d925d775496328e7a01a9c1260e1d83bed8038b60a4f8c81b12c15a3
-  herb (0.10.3-x86_64-darwin) sha256=e02e43b3bb1977f4fd08f3330b5f2aa3292ca2d572a8bd59688eca8b79725f46
-  herb (0.10.3-x86_64-linux-gnu) sha256=cbb49b66f2bdc92d17109d1ea9452e88ba6a8ae52e9ddd5279deff83dcc4c66d
-  herb (0.10.3-x86_64-linux-musl) sha256=c84482d6b57f13c2e1a0fa029649efb0e5fdc876a3fd564bae09cf42bd4d5ae1
-  herb-embedded (0.10.3.0)
+  herb (0.11.1) sha256=7a5a74c4931b341a2b7b7f5a530616801f5721a633d2655f002156ff553cd2d7
+  herb (0.11.1-aarch64-linux-gnu) sha256=5484e0fc0bd5d040380cbbf503e86dccf3fc1d33428b7ad02715ee7dcaa018f9
+  herb (0.11.1-aarch64-linux-musl) sha256=1113663d5e7832dad601547edb4606557ac84def516479ee5136fc7072747a58
+  herb (0.11.1-arm64-darwin) sha256=c5d3c1d5f88a504bcfa6a4bb52f56650dc40345e23cdf051b02f3390cf184d9e
+  herb (0.11.1-x86_64-darwin) sha256=f73cad010299bf998bd4ead676b80ae2c1f0ff5487a2ef852e8d83652f74ced0
+  herb (0.11.1-x86_64-linux-gnu) sha256=e3104c5dab07300a2ea6fc3898014cf57db978fbf09f5554a2a6ef6c46f973f8
+  herb (0.11.1-x86_64-linux-musl) sha256=0c687b667b612e7cc2403e9991ee7c8e8d10cfef026cf41165f9d99284630b09
+  herb-embedded (0.11.1.0)
   json (2.21.2) sha256=1f1d3b7cf2b3ba1a69beca0bb6db13d5438b80bff3cd54cdaaa620b9b07c1c6a
   language_server-protocol (3.17.0.6) sha256=5ef2c0c138f8267e1bc631d3328347d354f96724b0af22f2c79516120443b7f0
   libv8-node (24.12.0.1) sha256=d93d23b861bfe5de3ba829e34a142402fb83b4c3592dd58d9ac4e027588d739a
